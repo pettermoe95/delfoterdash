@@ -1,0 +1,63 @@
+/* stylelint-disable */
+
+.bar {
+    transition: 1s;
+    //animation: animate-in .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    animation-fill-mode: forwards;
+    transform-origin: center bottom;
+
+    border-radius: 1em 1em 0 0;
+    overflow: hidden;
+    display: inline-block;
+    opacity: 0;
+
+    transform: rotate(40deg);
+    opacity: 1;
+
+    &.delay_0 {
+        animation-delay: 0.2s;
+    }
+    &.delay_1 {
+        animation-delay: 0.4s;
+    }
+    &.delay_2 {
+        animation-delay: 0.3s;
+    }
+}
+
+@keyframes animate-in {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+.test {
+    /*
+    transform-box: content-box;
+    transform-box: border-box;
+    transform-box: fill-box;
+    transform-box: stroke-box;
+    
+    */
+    transform-box: border-box;
+    transform-origin: center bottom;
+    animation: test 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-delay: 0 !important;
+    animation-timing-function: linear;
+}
+
+@keyframes test {
+    0% {
+        transform: scaleY(0.5);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}

@@ -1,0 +1,76 @@
+.Select {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 1px solid var(--border-primary);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--bg-primary);
+
+    color: var(--text-primary);
+    font: var(--text-font-md-regular);
+
+    &::placeholder {
+        color: var(--text-placeholder);
+        font: var(--text-font-md-regular);
+    }
+
+    &:focus {
+        box-shadow: var(--ring-brand);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    // Ensure children text (span) does not overflow
+    & > span {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    // Sizes
+    &--sm {
+        padding: var(--spacing-md) var(--spacing-lg);
+        font: var(--text-font-sm-regular);
+        border-radius: var(--border-radius-sm);
+        gap: var(--spacing-xs);
+        svg {
+            font-size: 16px;
+        }
+    }
+    &--md {
+        padding: var(--spacing-md) var(--spacing-lg);
+        font: var(--text-font-md-regular);
+        border-radius: var(--border-radius-sm);
+        gap: var(--spacing-sm);
+        svg {
+            font-size: 20px;
+        }
+    }
+}
+
+.SearchFieldIcon {
+    width: 20px;
+    height: 20px;
+    color: var(--fg-quaternary);
+}
+
+.SearchFieldInput {
+    outline: none;
+    box-shadow: none;
+    border: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    &:focus,
+    &:focus-visible,
+    &:active {
+        outline: none;
+        box-shadow: none;
+    }
+}

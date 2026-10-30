@@ -1,0 +1,14 @@
+.we-panel-content[data-compact] .we-field {
+    gap: 4px;
+    margin-bottom: 10px;
+}
+.we-panel-content[data-compact] .we-object {
+    border: 0;
+    padding: 0;
+}
+.we-editor .we-panel-content[data-compact] input,
+.we-editor .we-panel-content[data-compact] select {
+    padding: 4px 7px;
+    font-size: 12px;
+    line-height: 18px;
+}

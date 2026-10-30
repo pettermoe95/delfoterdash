@@ -1,0 +1,24 @@
+name: 🛂 Validate Codeowners File
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/validate_codeowners.yml"
+      - "CODEOWNERS"
+
+jobs:
+  validate_codeowners:
+    name: 🛂 Validate Codeowners File
+    runs-on: ubuntu-latest
+    environment:
+      name: development
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+      - name: 👷‍♂️ Validate
+        uses: mszostok/codeowners-validator@v0.7.4
+        with:
+          checks: "files,owners,duppatterns,syntax"
+          experimental_checks: "notowned,avoid-shadowing"
+          # GitHub access token is required only if the `owners` check is enabled
+          github_access_token: ${{ secrets.OWNERS_VALIDATOR_GITHUB_SECRET }}

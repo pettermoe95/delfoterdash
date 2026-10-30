@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="128" viewBox="0 0 256 128">
+  <!-- Two horizontal 128x128 animation frames. Example asset; not part of the shipped roster. -->
+  <defs>
+    <g id="robot" stroke="#112a3b" stroke-width="3" stroke-linejoin="round">
+      <path d="M-20 15L-44 19L-50 1L-39 7L-29-2L-29 11Z" fill="#1d938a"/>
+      <path d="M-26-10L-17-31L1-24L20-31L30-6L24 29H-22Z" fill="#2cb8a4"/>
+      <path d="M-21-11H23V4H-21Z" fill="#102b3c"/>
+      <path d="M-15-6L-3-2L-15 0M8-2L19-7L18 0" fill="#ff416d" stroke="#ff416d" stroke-width="2"/>
+      <path d="M-2 9H30L35 17L21 24H-2Z" fill="#b1e9dd"/>
+      <path d="M5 12V20M13 12V21M21 12V20" fill="none"/>
+      <path d="M-17 29L-24 34H-5L-3 29M14 29L13 34H33L24 29" fill="#14756f"/>
+    </g>
+  </defs>
+  <use href="#robot" transform="translate(64 65)"/>
+  <use href="#robot" transform="translate(192 61) rotate(-3)"/>
+</svg>

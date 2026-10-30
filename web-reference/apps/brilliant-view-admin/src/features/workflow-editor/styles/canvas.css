@@ -1,0 +1,266 @@
+.we-node {
+    position: relative;
+    width: 218px;
+    height: 96px;
+    padding: 12px 16px;
+    border: 1px solid var(--border-primary, #cdd5df);
+    border-top: 5px solid var(--we-worker-color, var(--bg-brand-solid-primary));
+    border-radius: 9px;
+    background: linear-gradient(
+        180deg,
+        var(--bg-primary-hover),
+        var(--bg-primary)
+    );
+    box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.we-editor .we-node-name {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    width: 100%;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text-primary);
+    text-align: left;
+    cursor: grab;
+    user-select: none;
+    height: 20px;
+    flex-shrink: 0;
+    line-height: 20px;
+}
+
+.we-node-name strong {
+    flex: 1;
+}
+
+.we-node-name > span {
+    color: var(--text-tertiary);
+    font-size: 12px;
+}
+
+.we-node-rename {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    min-width: 0;
+    width: 100%;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.we-editor .we-node-rename input {
+    flex: 1;
+    padding: 0;
+    height: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.we-node-rename-actions {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--border-primary);
+    border-radius: 6px;
+    background: var(--bg-primary);
+    box-shadow: 0 2px 6px #0001;
+    z-index: 10;
+}
+
+.we-editor .we-node-rename button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    padding: 3px;
+    font-size: 16px;
+}
+
+.we-node-rename-error {
+    position: absolute;
+    top: calc(100% + 48px);
+    left: 0;
+    width: 270px;
+    padding: 8px 10px;
+    background: var(--bg-primary);
+    border: 1px solid var(--bg-error-solid);
+    border-radius: 6px;
+    font-size: 11px;
+    z-index: 10;
+}
+
+.we-editor .react-flow {
+    --xy-background-color: var(--bg-secondary);
+    --xy-background-pattern-dots-color: var(--border-primary);
+    --xy-edge-stroke: var(--border-primary);
+    --xy-controls-button-background-color: var(--bg-primary);
+    --xy-controls-button-background-color-hover: var(--bg-primary-hover);
+    --xy-controls-button-color: var(--text-primary);
+    --xy-controls-button-border-color: var(--border-secondary);
+}
+
+.we-editor .react-flow__controls-button {
+    padding: 5px;
+    border: 0;
+    border-radius: 0;
+    color: var(--text-primary);
+}
+
+.we-editor[data-theme='dark'] .react-flow {
+    --xy-edge-stroke: var(--text-tertiary);
+    --xy-edge-stroke-selected: var(--text-brand-primary);
+    --xy-connectionline-stroke: var(--text-tertiary);
+}
+
+.we-editor .react-flow__controls-button svg {
+    fill: currentColor;
+}
+
+.we-node strong {
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.we-node-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 9px;
+}
+
+.we-editor .we-node-issues {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    font-size: inherit;
+}
+.we-editor .we-node-issues.we-error {
+    color: var(--colors-primary-error-600);
+    font-weight: 700;
+}
+.we-editor[data-theme='dark'] .we-node-issues.we-error {
+    color: var(--colors-primary-error-400);
+}
+
+.we-status {
+    color: var(--text-tertiary);
+}
+
+.we-editor .we-worker-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    font-size: inherit;
+    color: var(--text-brand-primary);
+}
+
+.we-spinner {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: we-spin 0.8s linear infinite;
+}
+
+@keyframes we-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .we-spinner {
+        animation: none;
+    }
+}
+
+.we-editor .we-worker-status[data-status='success'] {
+    color: var(--text-success-primary);
+    font-weight: 600;
+}
+
+.we-editor .we-worker-status[data-status='failure'] {
+    color: var(--text-error-primary);
+    font-weight: 600;
+}
+
+.we-editor[data-theme='dark'] .we-worker-status[data-status='success'] {
+    color: var(--fg-success-secondary);
+}
+
+.we-editor[data-theme='dark'] .we-worker-status[data-status='failure'] {
+    color: var(--fg-error-secondary);
+}
+
+.we-node-selected {
+    outline: 2px solid var(--bg-brand-solid-primary);
+    outline-offset: 3px;
+}
+
+.we-editor [data-category='Fetch'] {
+    --we-worker-color: var(--bg-success-solid);
+}
+
+.we-editor [data-category='Load'] {
+    --we-worker-color: var(--bg-brand-solid-primary);
+}
+
+.we-editor [data-category='Model'] {
+    --we-worker-color: var(--border-warning);
+}
+
+.we-editor [data-category='Store'] {
+    --we-worker-color: var(--bg-brand-solid-secondary);
+}
+
+.we-node .react-flow__handle {
+    width: 16px;
+    height: 16px;
+    background: var(--bg-brand-solid-primary);
+    border: 2px solid var(--bg-primary);
+}
+
+.we-node .react-flow__handle::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+}
+
+.we-node .react-flow__handle:hover {
+    box-shadow: 0 0 0 3px var(--bg-brand-primary);
+}
+
+.we-empty {
+    pointer-events: none;
+    position: absolute;
+    top: 38%;
+    left: 15%;
+    right: 15%;
+    text-align: center;
+    color: var(--text-tertiary);
+}
+
+.we-empty h2 {
+    color: var(--text-secondary);
+    font-size: 22px;
+}

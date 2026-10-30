@@ -1,0 +1,73 @@
+/* Global SCSS sets many variables directly, so no strict declaration check here */
+/* stylelint-disable scale-unlimited/declaration-strict-value */
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+// Body
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    font-weight: 500;
+
+    // Viewport sizes are disallowed by default
+    /* stylelint-disable unit-allowed-list */
+    max-height: 100vh;
+    min-height: 100vh;
+    height: 100vh;
+    max-width: 100vw;
+    min-width: 100vw;
+    width: 100vw;
+    /* stylelint-enable unit-allowed-list */
+
+    overflow: hidden;
+}
+
+#root {
+    overflow: hidden;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+
+// Code
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+}
+
+// Clear input styling
+button,
+input,
+select {
+    all: unset;
+}

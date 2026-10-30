@@ -1,0 +1,7 @@
+.previewOverlay {
+    justify-content: center;
+    display: flex;
+    left: 0;
+    position: fixed;
+    width: calc(100vw - var(--edit-panel-width, 380px));
+}

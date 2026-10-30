@@ -1,0 +1,200 @@
+name: Generate changelog teams notification
+
+on:
+  workflow_dispatch:
+    inputs:
+        from_date:
+          description: 'Enter the startdate for changelog (YYYY-MM-DD)'
+          type: string
+          required: false
+          default: ''
+  schedule:
+    - cron: 0 12 * * 5 # Fridays at 13:00
+
+permissions:
+  contents: read
+
+jobs:
+  notify_changelog_channel:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 100 # max 100 commits
+          path: frontend
+
+      - uses: actions/checkout@v4
+        with:
+          repository: Brilliant-AS/brilliant_view_backend
+          ref: main
+          fetch-depth: 100
+          path: backend
+          token: ${{ secrets.CHANGELOG_BV_REPO_IVER_PAT }}
+
+      - uses: actions/checkout@v4
+        with:
+          repository: Brilliant-AS/brilliant_view_workflows
+          ref: main
+          fetch-depth: 100
+          path: workflows
+          token: ${{ secrets.CHANGELOG_BV_REPO_IVER_PAT }}
+
+      - uses: actions/checkout@v4
+        with:
+          repository: Brilliant-AS/brilliant_view_iac
+          ref: main
+          fetch-depth: 100
+          path: iac
+          token: ${{ secrets.CHANGELOG_BV_REPO_IVER_PAT }}
+
+      - name: Get commits since date
+        id: get_commits
+        run: |
+          if [ -z "${{ inputs.from_date }}" ]; then
+            FROM_DATE=$(date -d '7 days ago' +%Y-%m-%d)
+          else
+            FROM_DATE="${{ inputs.from_date }}"
+          fi
+
+          # Get commits from frontend with timestamp for sorting
+          cd frontend
+          FRONTEND_REPO_URL="https://github.com/${{ github.repository }}"
+          ALL_COMMITS_FILE=$(mktemp)
+          while IFS='|' read -r COMMIT_HASH COMMIT_TIMESTAMP COMMIT_DATE COMMIT_MSG; do
+            # Extract Linear issue ID from commit message
+            LINEAR_LINK=""
+            if [[ "$COMMIT_MSG" =~ /bri[[:space:]]([0-9]+) ]]; then
+              ISSUE_NUM="${BASH_REMATCH[1]}"
+              LINEAR_LINK=" [[BRI-$ISSUE_NUM](https://linear.app/brilliant-products/issue/BRI-$ISSUE_NUM)]"
+            fi
+            echo "$COMMIT_TIMESTAMP|🎨|- **$COMMIT_DATE**: [${COMMIT_HASH:0:7}]($FRONTEND_REPO_URL/commit/$COMMIT_HASH) $COMMIT_MSG$LINEAR_LINK" >> "$ALL_COMMITS_FILE"
+          done < <(git log --since="$FROM_DATE" --pretty=format:"%H|%ct|%cd|%s" --date=format:"%d.%m.%Y")
+
+          # Get commits from backend with timestamp for sorting
+          cd ../backend
+          BACKEND_REPO_URL="https://github.com/Brilliant-AS/brilliant_view_backend"
+          while IFS='|' read -r COMMIT_HASH COMMIT_TIMESTAMP COMMIT_DATE COMMIT_MSG; do
+            # Extract Linear issue ID from commit message
+            LINEAR_LINK=""
+            if [[ "$COMMIT_MSG" =~ /bri[[:space:]]([0-9]+) ]]; then
+              ISSUE_NUM="${BASH_REMATCH[1]}"
+              LINEAR_LINK=" [[BRI-$ISSUE_NUM](https://linear.app/brilliant-products/issue/BRI-$ISSUE_NUM)]"
+            fi
+            echo "$COMMIT_TIMESTAMP|⚙️|- **$COMMIT_DATE**: [${COMMIT_HASH:0:7}]($BACKEND_REPO_URL/commit/$COMMIT_HASH) $COMMIT_MSG$LINEAR_LINK" >> "$ALL_COMMITS_FILE"
+          done < <(git log --since="$FROM_DATE" --pretty=format:"%H|%ct|%cd|%s" --date=format:"%d.%m.%Y")
+
+          # Get commits from workflows with timestamp for sorting
+          cd ../workflows
+          WORKFLOWS_REPO_URL="https://github.com/Brilliant-AS/brilliant_view_workflows"
+          while IFS='|' read -r COMMIT_HASH COMMIT_TIMESTAMP COMMIT_DATE COMMIT_MSG; do
+            # Extract Linear issue ID from commit message
+            LINEAR_LINK=""
+            if [[ "$COMMIT_MSG" =~ /bri[[:space:]]([0-9]+) ]]; then
+              ISSUE_NUM="${BASH_REMATCH[1]}"
+              LINEAR_LINK=" [[BRI-$ISSUE_NUM](https://linear.app/brilliant-products/issue/BRI-$ISSUE_NUM)]"
+            fi
+            echo "$COMMIT_TIMESTAMP|🔄|- **$COMMIT_DATE**: [${COMMIT_HASH:0:7}]($WORKFLOWS_REPO_URL/commit/$COMMIT_HASH) $COMMIT_MSG$LINEAR_LINK" >> "$ALL_COMMITS_FILE"
+          done < <(git log --since="$FROM_DATE" --pretty=format:"%H|%ct|%cd|%s" --date=format:"%d.%m.%Y")
+
+          # Get commits from iac with timestamp for sorting
+          cd ../iac
+          IAC_REPO_URL="https://github.com/Brilliant-AS/brilliant_view_iac"
+          while IFS='|' read -r COMMIT_HASH COMMIT_TIMESTAMP COMMIT_DATE COMMIT_MSG; do
+            # Extract Linear issue ID from commit message
+            LINEAR_LINK=""
+            if [[ "$COMMIT_MSG" =~ /bri[[:space:]]([0-9]+) ]]; then
+              ISSUE_NUM="${BASH_REMATCH[1]}"
+              LINEAR_LINK=" [[BRI-$ISSUE_NUM](https://linear.app/brilliant-products/issue/BRI-$ISSUE_NUM)]"
+            fi
+            echo "$COMMIT_TIMESTAMP|🚂|- **$COMMIT_DATE**: [${COMMIT_HASH:0:7}]($IAC_REPO_URL/commit/$COMMIT_HASH) $COMMIT_MSG$LINEAR_LINK" >> "$ALL_COMMITS_FILE"
+          done < <(git log --since="$FROM_DATE" --pretty=format:"%H|%ct|%cd|%s" --date=format:"%d.%m.%Y")
+
+          # Sort by timestamp (descending) and format output
+          COMMITS=""
+          while IFS='|' read -r TIMESTAMP EMOJI COMMIT_LINE; do
+            COMMITS="${COMMITS}${EMOJI} ${COMMIT_LINE}\n\n‌‌ \n\n"
+          done < <(sort -t'|' -k1 -rn "$ALL_COMMITS_FILE")
+
+          rm "$ALL_COMMITS_FILE"
+
+          echo "commits<<EOF" >> $GITHUB_OUTPUT
+          echo -e "$COMMITS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          echo "from_date=$FROM_DATE" >> $GITHUB_OUTPUT
+
+      - name: Notify teams changelog channel
+        env:
+          WEBHOOK_URL: ${{ secrets.TEAMS_RELEASENOTES_WEBHOOK_URL }}
+        run: |
+          curl -sS -X POST -H "Content-Type: application/json" -d '{
+            "type": "message",
+            "attachments": [
+              {
+                "contentType": "application/vnd.microsoft.card.adaptive",
+                "content": {
+                  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                  "type": "AdaptiveCard",
+                  "version": "1.2",
+                  "body": [
+                    {
+                      "type": "TextBlock",
+                      "text": "🚀 Changelog Brilliant View",
+                      "weight": "bolder",
+                      "size": "extraLarge",
+                      "color": "accent"
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "Commits to main",
+                      "size": "medium",
+                      "weight": "bolder",
+                      "spacing": "none"
+                    },
+                    {
+                      "type": "Container",
+                      "separator": true,
+                      "spacing": "medium",
+                      "items": [
+                        {
+                          "type": "ColumnSet",
+                          "columns": [
+                            {
+                              "type": "Column",
+                              "width": "auto",
+                              "items": [
+                                {
+                                  "type": "TextBlock",
+                                  "text": "📅",
+                                  "size": "medium"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "Column",
+                              "width": "stretch",
+                              "items": [
+                                {
+                                  "type": "TextBlock",
+                                  "text": "Commits since ${{ steps.get_commits.outputs.from_date }}",
+                                  "weight": "bolder",
+                                  "size": "medium"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "${{ steps.get_commits.outputs.commits }}",
+                      "wrap": true,
+                      "spacing": "medium"
+                    }
+                  ]
+                }
+              }
+            ]
+          }' "$WEBHOOK_URL"

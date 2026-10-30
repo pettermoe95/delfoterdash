@@ -1,0 +1,62 @@
+/* TODO stylelint */
+/* stylelint-disable */
+
+$drag-bar-width: 10px;
+
+.wrapper {
+    transition: 0.3s;
+    transition-timing-function: cubic-bezier(0.29, 1.11, 0.46, 1.16);
+    box-sizing: border-box;
+    border: 2px solid var(--background-color-tertiary);
+    background-color: var(--background-color-primary);
+    border-radius: 0.5em;
+    overflow: hidden;
+}
+
+.wrapper.is_dragging {
+    transition: 0s;
+}
+
+.content {
+    width: calc(100% - $drag-bar-width);
+    height: calc(100% - $drag-bar-width);
+    box-sizing: border-box;
+}
+
+.row {
+    max-height: calc(100% - $drag-bar-width);
+    height: calc(100% - $drag-bar-width);
+}
+
+.drag_right,
+.drag_bottom,
+.drag_corner {
+    background-color: var(--background-color-tertiary);
+}
+
+.drag_right {
+    cursor: ew-resize;
+    height: 100%;
+    max-width: $drag-bar-width;
+    min-width: $drag-bar-width;
+    width: $drag-bar-width;
+}
+
+.drag_bottom {
+    cursor: ns-resize;
+    width: 100%;
+    max-height: $drag-bar-width;
+    min-height: $drag-bar-width;
+    height: $drag-bar-width;
+}
+
+.drag_corner {
+    cursor: nwse-resize;
+    max-width: $drag-bar-width;
+    min-width: $drag-bar-width;
+    width: $drag-bar-width;
+
+    max-height: $drag-bar-width;
+    min-height: $drag-bar-width;
+    height: $drag-bar-width;
+}

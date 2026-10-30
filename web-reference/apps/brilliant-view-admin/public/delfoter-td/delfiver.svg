@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="160" viewBox="0 0 192 160">
+ <g stroke="#132f43" stroke-width="3" stroke-linejoin="round">
+  <path d="M69 99L30 105L15 88L25 78L43 91L62 86Z" fill="#237e88"/>
+  <path d="M62 77L51 124L67 132L85 98M104 94L119 127L142 131L140 120L127 115L122 79" fill="#183f58"/>
+  <path d="M57 45L73 23L114 27L133 48L125 105H62Z" fill="#3b959c"/>
+  <path d="M65 40L59 15L78 26L91 7L103 25L126 16L121 38" fill="#71b8bd"/>
+  <path d="M56 38Q86 10 126 38" stroke="#ed9a43" stroke-width="9" fill="none"/>
+  <path d="M63 45H123V64H63Z" fill="#102b3c"/><path d="M70 49L84 55L70 58M101 55L116 49V58" fill="#ff426d" stroke="#ff426d" stroke-width="2"/>
+  <path d="M76 68H129L134 80L113 91H77Z" fill="#b2e0d9"/><path d="M85 72L90 83L96 72L102 84L108 72" fill="none" stroke-width="2"/>
+  <rect x="94" y="88" width="75" height="40" rx="18" fill="#1c6a77"/>
+  <ellipse cx="132" cy="88" rx="38" ry="15" fill="#d8fff3"/>
+  <ellipse cx="132" cy="88" rx="31" ry="11" fill="#47cbb4" stroke-width="1"/>
+  <text x="132" y="89" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="900" fill="#123c48" stroke="none">EPOQ</text>
+  <text x="132" y="99" text-anchor="middle" font-family="sans-serif" font-size="5" font-weight="800" fill="#123c48" stroke="none">NICOTINE FREE</text>
+  <text x="132" y="117" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="900" fill="#caffec" stroke="none">0 mg</text>
+  <path d="M77 97Q83 113 100 109" fill="none" stroke="#67a6ad" stroke-width="10"/>
+ </g>
+</svg>

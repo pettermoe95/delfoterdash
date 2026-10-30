@@ -1,0 +1,19 @@
+.wrapper {
+    display: flex;
+
+    margin: auto;
+    width: 100%;
+    justify-content: center;
+
+    > * {
+        display: flex;
+        align-items: center;
+        aspect-ratio: 3.47;
+    }
+}
+
+.docsWrapper {
+    min-height: 400px;
+    position: relative;
+    width: 100%;
+}

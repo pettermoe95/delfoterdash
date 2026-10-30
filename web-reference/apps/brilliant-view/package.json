@@ -1,0 +1,111 @@
+{
+    "name": "brilliant-view",
+    "version": "0.8.5",
+    "type": "module",
+    "exports": {
+        ".": "./tailwind.config.ts"
+    },
+    "scripts": {
+        "dev": "vite --port 7575",
+        "build": "tsc && vite build",
+        "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+        "format": "prettier --check . --ignore-path ../../.gitignore",
+        "test": "vitest --passWithNoTests",
+        "preview": "vite preview",
+        "clean": "git clean -xdf node_modules .cache dist .turbo",
+        "typecheck": "tsc --noEmit",
+        "publish-packages": "echo 'Publishing View'"
+    },
+    "dependencies": {
+        "@adobe/react-spectrum": "3.44.1",
+        "@brilliant/bds-core": "workspace:*",
+        "@brilliant/components": "workspace:*",
+        "@bv/api": "workspace:*",
+        "@bv/design-tokens": "workspace:*",
+        "@bv/graph-components": "workspace:*",
+        "@bv/ui": "workspace:*",
+        "@faker-js/faker": "8.4.1",
+        "@fontsource/inter": "5.0.18",
+        "@fontsource/rubik": "5.0.20",
+        "@hookform/resolvers": "^3.6.0",
+        "@internationalized/date": "3.9.0",
+        "@react-aria/interactions": "3.25.5",
+        "@react-spectrum/calendar": "3.7.6",
+        "@react-spectrum/datepicker": "3.14.6",
+        "@react-types/calendar": "3.7.4",
+        "@tanstack/react-query": "catalog:",
+        "@tanstack/react-query-devtools": "5.84.1",
+        "@tanstack/react-table": "catalog:",
+        "axios": "1.8.4",
+        "classnames": "2.5.1",
+        "dayjs": "1.11.11",
+        "jotai": "2.8.2",
+        "react": "catalog:",
+        "react-dom": "catalog:",
+        "react-grid-layout": "1.4.4",
+        "react-hook-form": "catalog:",
+        "react-papaparse": "4.4.0",
+        "react-router-dom": "6.24.1",
+        "react-use": "catalog:",
+        "tailwindcss": "catalog:",
+        "zod": "3.23.8"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.21.4",
+        "@babel/plugin-syntax-flow": "^7.21.4",
+        "@babel/plugin-transform-react-jsx": "^7.21.0",
+        "@react-types/shared": "3.32.0",
+        "@repo/eslint-config": "workspace:*",
+        "@repo/prettier-config": "workspace:*",
+        "@tanstack/eslint-plugin-query": "catalog:",
+        "@testing-library/jest-dom": "^6.4.2",
+        "@testing-library/react": "^14.2.1",
+        "@types/node": "catalog:",
+        "@types/react": "catalog:",
+        "@types/react-dom": "catalog:",
+        "@types/react-grid-layout": "^1.3.5",
+        "@vitejs/plugin-react": "^4.2.1",
+        "autoprefixer": "^10.4.19",
+        "eslint": "^9.32.0",
+        "eslint-plugin-react-refresh": "catalog:",
+        "jsdom": "^24.0.0",
+        "postcss": "^8.4.38",
+        "prettier": "catalog:",
+        "sass": "^1.62.1",
+        "stylelint": "^15.3.0",
+        "stylelint-config-standard": "^32.0.0",
+        "stylelint-config-standard-scss": "^8.0.0",
+        "stylelint-declaration-strict-value": "^1.9.2",
+        "stylelint-itcss": "^0.4.0",
+        "@typescript/native": "catalog:",
+        "typescript": "catalog:",
+        "vite": "catalog:",
+        "vite-plugin-svgr": "^3.2.0",
+        "vitest": ">=1.6.1"
+    },
+    "prettier": "@repo/prettier-config",
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ],
+        "overrides": [
+            {
+                "files": [
+                    "**/*.stories.*"
+                ],
+                "rules": {
+                    "import/no-anonymous-default-export": "off"
+                }
+            },
+            {
+                "files": [
+                    "**/*.stories.*"
+                ],
+                "rules": {
+                    "import/no-anonymous-default-export": "off"
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,15 @@
+:root {
+    --nav-item-fg: #697586;
+    --text-quaternary: #697586;
+
+    [data-theme='dark'] {
+        --nav-item-fg: #94969c;
+    }
+}
+.sidebarNavigationItems {
+    a {
+        svg {
+            color: var(--nav-item-fg) !important;
+        }
+    }
+}

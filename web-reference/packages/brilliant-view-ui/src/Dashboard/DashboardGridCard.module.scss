@@ -1,0 +1,8 @@
+.dashboardGridCard[role='button'][data-disabled='true'] {
+    cursor: not-allowed;
+
+    // Same styles as the disabled IconButton
+    background: var(--bg-disabled-subtle) !important;
+    border: 1px solid var(--border-disabled) !important;
+    color: var(--text-disabled) !important;
+}

@@ -1,0 +1,27 @@
+/* TODO stylelint */
+/* stylelint-disable */
+
+.snapGrid {
+    display: grid;
+
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    border-left: 1px dashed var(--background-color-secondary);
+    border-top: 1px dashed var(--background-color-secondary);
+
+    background-size: 5px 5px;
+    background-image: linear-gradient(to right, grey 1px, transparent 1px),
+        linear-gradient(to bottom, grey 1px, transparent 1px);
+}
+
+.grid_cell {
+    border-right: 1px dashed var(--background-color-secondary);
+    border-bottom: 1px dashed var(--background-color-secondary);
+}
+
+.cell_hover {
+    border: 1px solid red;
+}

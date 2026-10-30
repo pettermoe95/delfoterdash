@@ -1,0 +1,31 @@
+name: 🚀 Deploy Brilliant View DEV
+
+on:
+  push:
+    branches:
+      - release_dev
+    paths:
+      - "deploy_frontend_dev.yml"
+      - "apps/brilliant-view/**"
+      - "packages/**"
+
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-deploy_frontend
+  cancel-in-progress: true
+
+jobs:
+  deploy-brilliant-view:
+    name: Deploy Brilliant View
+    uses: ./.github/workflows/base_deploy_frontend.yml
+    secrets: inherit
+    with:
+      app-name: brilliant-view
+      image-name: brilliant-view
+      environment: development
+      debug: true

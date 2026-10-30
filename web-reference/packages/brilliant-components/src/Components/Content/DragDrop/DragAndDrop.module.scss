@@ -1,0 +1,49 @@
+@keyframes pickupAnimation {
+    0% {
+        transform: scale(1.03);
+    }
+    10% {
+        transform: scale(0.97);
+    }
+    50% {
+        transform: scale(1.01);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.dragPreview {
+    pointer-events: none !important;
+    user-select: none !important;
+    * {
+        pointer-events: none !important;
+        user-select: none !important;
+    }
+}
+
+@keyframes dropAnimation {
+    0% {
+        transform: scale(1.03);
+        opacity: 0;
+    }
+    10% {
+        transform: scale(0.97);
+    }
+    50% {
+        transform: scale(1.01);
+    }
+    100% {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+.dropAnim {
+    animation-name: dropAnimation;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    transform-origin: 50% 50%;
+    pointer-events: none;
+}

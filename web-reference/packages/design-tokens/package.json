@@ -1,0 +1,47 @@
+{
+    "name": "@bv/design-tokens",
+    "description": "Design Tokens used for Theming in Brilliant Apps",
+    "version": "0.2.6",
+    "private": true,
+    "type": "module",
+    "main": "src/tokens/index.ts",
+    "exports": {
+        ".": "./src/tokens/index.ts",
+        "./tailwind/base": "./src/tailwind/base.ts",
+        "./tokens.css": "./src/styling/tokens.css",
+        "./alias.css": "./src/styling/alias.css",
+        "./util": "./src/util/index.ts"
+    },
+    "files": [
+        "dist/**"
+    ],
+    "scripts": {
+        "clean": "git clean -xdf node_modules dist .turbo .cache",
+        "typecheck": "tsc --noEmit",
+        "test": "vitest",
+        "build": "tsup",
+        "format": "prettier --check . !**/*.css --ignore-path ../../.gitignore",
+        "generate-static-assets": "tsx ./src/util/writeCSSVariables.ts"
+    },
+    "author": "Simen Abelsen <simen.nordbo.abelsen@brilliant.no>",
+    "devDependencies": {
+        "@repo/prettier-config": "workspace:*",
+        "@repo/typescript-config": "workspace:*",
+        "prettier": "catalog:",
+        "@types/lodash": "^4.17.4",
+        "@types/node": "catalog:",
+        "ts-node": "^10.9.2",
+        "tsup": "^8.0.2",
+        "tsx": "^4.11.0",
+        "@typescript/native": "catalog:",
+        "typescript": "catalog:",
+        "vitest": "^1.3.0"
+    },
+    "dependencies": {
+        "lodash": "4.17.21",
+        "postcss": "8.4.38",
+        "react": "catalog:",
+        "tailwindcss": "catalog:"
+    },
+    "prettier": "@repo/prettier-config"
+}

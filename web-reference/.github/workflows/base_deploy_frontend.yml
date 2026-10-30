@@ -1,0 +1,83 @@
+on:
+  workflow_call:
+    inputs:
+      app-name:
+        type: string
+        description: "Frontend application name"
+        required: true
+      image-name:
+        type: string
+        description: "Container image name"
+        required: true
+      environment:
+        type: string
+        description: "Deployment environment"
+        required: true
+      debug:
+        type: boolean
+        description: "Debug mode"
+        required: false
+        default: false
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-frontend-artifact:
+    name: 👷‍♂️ Build Frontend Artifact
+    runs-on: self-hosted
+    environment:
+      name: ${{ inputs.environment }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: 🔧 Setup PNPM and Turbo
+        uses: ./tooling/github/setup
+
+      - name: 👷‍♂️ Build ${{ inputs.app-name }} for ${{ inputs.environment }}
+        shell: bash
+        run: turbo build --filter ${{ inputs.app-name}}
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+          VITE_ADMIN_REDIRECT_URI: ${{ vars.VITE_ADMIN_REDIRECT_URI }}
+
+      - name: ⬆️ Upload Frontend Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-artifact
+          path: ./apps/${{ inputs.app-name }}/dist
+
+  deploy_to_aks:
+    name: 🚀 Deploy to AKS
+    needs: build-frontend-artifact
+    runs-on: self-hosted
+    environment:
+      name: ${{ inputs.environment }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: ⬇️ Download Frontend Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-artifact
+          path: ./dist
+
+      - name: 🔍 List files in dist (for debugging purposes)
+        if: ${{ inputs.debug }}
+        run: ls -la ./dist
+
+        shell: bash
+      - name: 🚀 Build and Deploy to AKS
+        uses: ./tooling/github/deploy-aks
+        with:
+          app-name: ${{ inputs.image-name }}
+          env-name: ${{ inputs.environment }}
+          azure-credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          azure-client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          azure-tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          azure-subscription-id: ${{ inputs.environment == 'development' && secrets.AZURE_DEV_SUBSCRIPTION_ID || inputs.environment == 'test' && secrets.AZURE_TEST_SUBSCRIPTION_ID || inputs.environment == 'production' && secrets.AZURE_PROD_SUBSCRIPTION_ID}}
+          aks-resource-group: ${{ vars.AKS_RESOURCE_GROUP }}
+          aks-cluster-name: ${{ vars.CLUSTER_NAME }}
+          registry-name: ${{ vars.REGISTRY_NAME }}
+          registry-username: ${{ vars.REGISTRY_USERNAME }}
+          service-principal-secret: ${{ secrets.SERVICE_PRINCIPAL_SECRET }}
+          version: ${{ github.sha }}

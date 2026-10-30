@@ -1,0 +1,114 @@
+.TextFieldRoot {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    width: auto;
+}
+.TextFieldWrapper {
+    display: flex;
+    width: 100%;
+}
+.TextFieldInputGroup {
+    flex: 1;
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    box-shadow: var(--shadow-xs);
+    &:focus-within {
+        box-shadow: var(--ring-brand), var(--shadow-sm);
+    }
+}
+.TextFieldIcon {
+    width: 20px;
+    height: 20px;
+    color: var(--fg-quaternary);
+}
+.TextFieldInput {
+    color: var(--text-primary);
+    width: 100%;
+    &::placeholder {
+        color: var(--text-placeholder);
+    }
+}
+
+.TextFieldLabel {
+    color: var(--text-secondary);
+    font: var(--text-font-sm-medium);
+}
+
+.SupportingText {
+    font: var(--text-font-sm-light);
+}
+.TextFieldRoot {
+    &--error {
+        .TextFieldInputGroup {
+            border: 1px solid var(--border-error);
+            &:focus-within {
+                box-shadow: var(--ring-error), var(--shadow-xs);
+            }
+        }
+        .SupportingText {
+            color: var(--text-error-primary);
+        }
+    }
+}
+
+.TextFieldInputGroup {
+    width: 100%;
+    overflow: hidden;
+    &--sm {
+        padding: var(--spacing-md) var(--spacing-lg);
+        font: var(--text-font-sm-regular);
+        .TextFieldInput::placeholder {
+            font: var(--text-font-sm-regular);
+        }
+    }
+    &--md {
+        padding: var(--spacing-md) var(--spacing-lg);
+        font: var(--text-font-md-regular);
+        .TextFieldInput::placeholder {
+            font: var(--text-font-md-regular);
+        }
+    }
+    &--with-action {
+        border-top-right-radius: var(--border-radius-none);
+        border-bottom-right-radius: var(--border-radius-none);
+    }
+}
+.TextFieldAction {
+    border-left: none !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    &--sm {
+        padding: 0 var(--spacing-lg);
+    }
+    &--md {
+        padding: 0 var(--spacing-xl);
+    }
+}
+
+.TextFieldInfo {
+    display: flex;
+    align-items: center;
+    button {
+        height: 16px;
+    }
+    &--error {
+        color: var(--fg-error-primary);
+    }
+}
+
+[data-disabled] {
+    .TextFieldInputGroup {
+        border: 1px solid var(--border-disabled);
+        background-color: var(--bg-disabled-subtle);
+        cursor: not-allowed;
+    }
+    .TextFieldInput {
+        color: var(--text-disabled);
+        cursor: not-allowed;
+    }
+}

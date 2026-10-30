@@ -1,0 +1,16 @@
+{
+    "name": "@bv/i18n-utils",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "exports": {
+        ".": "./src/index.ts"
+    },
+    "scripts": {
+        "typecheck": "tsc --noEmit"
+    },
+    "devDependencies": {
+        "@repo/typescript-config": "workspace:*",
+        "@typescript/native": "catalog:"
+    }
+}

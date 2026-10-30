@@ -1,0 +1,41 @@
+.Table {
+    width: 100%;
+    text-align: left;
+    border-collapse: separate; /* Don't collapse */
+    border-spacing: 0;
+    position: relative;
+}
+
+.HeaderCell {
+    padding: var(--spacing-lg) var(--spacing-lg);
+    font-size: var(--text-size-sm);
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--text-tertiary);
+    text-align: left;
+    background-clip: padding-box;
+    border-bottom: 2px solid var(--border-primary);
+}
+.TableHead[data-sticky] {
+    .HeaderCell {
+        position: sticky;
+        top: 0;
+        background-color: var(--bg-primary);
+    }
+}
+
+.TableRow {
+    // box-shadow: 0 1px 0 0 var(--border-secondary);
+    &--highlight-on-hover:hover {
+        background-color: var(--bg-primary-hover);
+    }
+}
+
+.TableCell {
+    padding: var(--spacing-lg) var(--spacing-lg);
+    font-size: var(--text-size-sm);
+    line-height: 20px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    box-shadow: 0 1px 0 0 var(--border-secondary);
+}

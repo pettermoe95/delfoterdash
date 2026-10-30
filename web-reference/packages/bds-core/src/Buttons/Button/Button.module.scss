@@ -1,0 +1,30 @@
+.Button {
+    // Sizes
+    &--sm {
+        padding: var(--spacing-md) var(--spacing-lg);
+        font: var(--text-font-sm-medium);
+        border-radius: var(--border-radius-sm);
+        gap: var(--spacing-xs);
+        svg {
+            font-size: 16px;
+        }
+    }
+    &--md {
+        padding: var(--spacing-md) var(--spacing-xl);
+        font: var(--text-font-md-medium);
+        border-radius: var(--border-radius-sm);
+        gap: var(--spacing-sm);
+        svg {
+            font-size: 20px;
+        }
+    }
+    &--lg {
+        padding: var(--spacing-xl) 22px;
+        font: var(--text-font-lg-medium);
+        border-radius: var(--border-radius-md);
+        gap: 10px;
+        svg {
+            font-size: 24px;
+        }
+    }
+}

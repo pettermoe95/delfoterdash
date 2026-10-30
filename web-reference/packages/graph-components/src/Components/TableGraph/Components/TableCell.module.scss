@@ -1,0 +1,46 @@
+.tableCell {
+    height: var(--spacing-4-xl);
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-secondary);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.alignLeft {
+    text-align: left;
+}
+
+.alignRight {
+    text-align: right;
+}
+
+.bodyCell {
+    background-color: inherit;
+}
+
+.domainCell {
+    position: sticky;
+    left: 0;
+    z-index: 11;
+    font-weight: 400;
+    color: var(--text-secondary);
+    background-color: inherit;
+    box-shadow: 1px 0 0 0 var(--border-secondary);
+}
+
+.footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    font-weight: 600;
+    border-top: 1px solid var(--border-primary);
+    background-color: var(--bg-primary);
+    border-bottom: 0;
+}
+
+.footer.domainCell {
+    z-index: 11;
+}

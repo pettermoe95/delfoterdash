@@ -1,0 +1,157 @@
+:root {
+    --resize-border-color: var(--colors-primary-brand-600);
+}
+[data-theme='dark'] {
+    --resize-border-color: var(--colors-primary-brand-800);
+}
+
+.react-grid-layout {
+    position: relative;
+    transition: height 200ms ease;
+    &.noTransition {
+        transition: none !important;
+        * {
+            transition: none !important;
+        }
+    }
+}
+.react-grid-item {
+    transition: all 200ms ease;
+    transition-property: left, top, width, height;
+}
+.react-grid-item img {
+    pointer-events: none;
+    user-select: none;
+}
+.react-grid-item.cssTransforms {
+    transition-property: transform, width, height;
+}
+.react-grid-item.resizing {
+    transition: none;
+    z-index: 2;
+    will-change: width, height;
+
+    // Custom
+    user-select: none;
+    & > * {
+        pointer-events: none;
+        // opacity: 0.5;
+    }
+}
+
+.react-grid-item.react-draggable-dragging {
+    transition: none;
+    z-index: 3;
+    will-change: transform;
+
+    // Custom
+    user-select: none;
+    & > * {
+        pointer-events: none;
+    }
+}
+
+.react-grid-item.dropping {
+    visibility: hidden;
+}
+
+.react-grid-item.react-grid-placeholder {
+    transition-duration: 100ms;
+    z-index: 1;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+
+    // Custom
+    background: var(--bg-primary);
+    opacity: 0.6;
+    border-radius: 1em;
+}
+
+.react-grid-item.react-grid-placeholder.placeholder-resizing {
+    transition: none;
+}
+
+.react-grid-item > .react-resizable-handle {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary);
+    border-radius: 100%;
+    bottom: -10px;
+    right: -10px;
+    cursor: nwse-resize;
+    &:hover {
+        background: var(--bg-primary-hover);
+    }
+}
+
+.react-grid-item > .react-resizable-handle::after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14px' height='14px' viewBox='0 0 14 14' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M2.9359 1.92323L12.0767 11.0642V9.17376C12.0767 9.08032 12.0952 8.98779 12.1309 8.90145C12.1667 8.81512 12.2191 8.73668 12.2852 8.6706C12.3512 8.60453 12.4297 8.55211 12.516 8.51635C12.6023 8.48059 12.6949 8.46219 12.7883 8.46219C12.8818 8.46219 12.9743 8.48059 13.0606 8.51635C13.1469 8.55211 13.2254 8.60453 13.2915 8.6706C13.3575 8.73668 13.4099 8.81512 13.4457 8.90145C13.4815 8.98779 13.4999 9.08032 13.4999 9.17376V12.731L13.4995 12.7563C13.5031 12.8539 13.4865 12.9512 13.4507 13.0421C13.4149 13.133 13.3607 13.2155 13.2915 13.2845C13.1725 13.4038 13.0148 13.4769 12.8468 13.4904C12.8085 13.4968 12.7697 13.5 12.7308 13.5L9.17371 13.5C8.98499 13.5 8.804 13.425 8.67056 13.2916C8.53711 13.1581 8.46214 12.9771 8.46214 12.7884C8.46214 12.5997 8.53711 12.4187 8.67056 12.2853C8.804 12.1518 8.98499 12.0769 9.17371 12.0769H11.0782L1.92295 2.92217L1.92295 4.82631C1.92503 4.92105 1.90817 5.01525 1.87335 5.10338C1.83853 5.19151 1.78646 5.27179 1.7202 5.33953C1.65393 5.40726 1.57481 5.46108 1.48747 5.49782C1.40012 5.53456 1.30632 5.55349 1.21156 5.55349C1.11681 5.55349 1.023 5.53456 0.93566 5.49782C0.848316 5.46108 0.76919 5.40726 0.702926 5.33953C0.636661 5.27179 0.584593 5.19151 0.549776 5.10338C0.514958 5.01525 0.498094 4.92105 0.500171 4.82631L0.500171 1.26912C0.500171 1.22944 0.503592 1.19078 0.50975 1.15281C0.522749 0.990995 0.591511 0.832602 0.715692 0.708418C0.860742 0.563025 1.05334 0.493918 1.24389 0.500419L1.26921 0.500076H4.82633C5.01505 0.500077 5.19604 0.575047 5.32948 0.708492C5.46293 0.841939 5.5379 1.02293 5.5379 1.21165C5.5379 1.40037 5.46293 1.58136 5.32948 1.71481C5.19604 1.84826 5.01505 1.92323 4.82633 1.92323H2.9359Z' fill='%23697586'/%3E%3C/svg%3E");
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 4px;
+    left: 8px;
+}
+
+.react-resizable-hide > .react-resizable-handle {
+    display: none;
+    position: relative;
+}
+
+.react-grid-item > .react-resizable-handle.react-resizable-handle-sw {
+    bottom: 0;
+    left: 0;
+    cursor: sw-resize;
+    transform: rotate(90deg);
+}
+/* ======== THIS ONE IS USED ========= */
+.react-grid-item > .react-resizable-handle.react-resizable-handle-se {
+    bottom: -10px;
+    right: -10px;
+}
+/* ======== ========= */
+.react-grid-item > .react-resizable-handle.react-resizable-handle-nw {
+    top: 0;
+    left: 0;
+    cursor: nw-resize;
+    transform: rotate(180deg);
+}
+.react-grid-item > .react-resizable-handle.react-resizable-handle-ne {
+    top: 0;
+    right: 0;
+    cursor: ne-resize;
+    transform: rotate(270deg);
+}
+.react-grid-item > .react-resizable-handle.react-resizable-handle-w,
+.react-grid-item > .react-resizable-handle.react-resizable-handle-e {
+    top: 50%;
+    margin-top: -10px;
+    cursor: ew-resize;
+}
+.react-grid-item > .react-resizable-handle.react-resizable-handle-w {
+    left: 0;
+    transform: rotate(135deg);
+}
+.react-grid-item > .react-resizable-handle.react-resizable-handle-e {
+    right: 0;
+    transform: rotate(315deg);
+}
+.react-grid-item > .react-resizable-handle.react-resizable-handle-n,
+.react-grid-item > .react-resizable-handle.react-resizable-handle-s {
+    left: 50%;
+    margin-left: -10px;
+    cursor: ns-resize;
+}
+.react-grid-item > .react-resizable-handle.react-resizable-handle-n {
+    top: 0;
+    transform: rotate(225deg);
+}
+.react-grid-item > .react-resizable-handle.react-resizable-handle-s {
+    bottom: 0;
+    transform: rotate(45deg);
+}

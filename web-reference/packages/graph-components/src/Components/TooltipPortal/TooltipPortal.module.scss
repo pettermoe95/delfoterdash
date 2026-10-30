@@ -1,0 +1,8 @@
+.root {
+    position: fixed;
+    inset: 0;
+    width: 0; /* size determined by children */
+    height: 0;
+    pointer-events: none; /* let underlying graphs receive events */
+    z-index: var(--graph-tooltip-z, 20000);
+}

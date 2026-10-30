@@ -1,0 +1,57 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "globalDependencies": ["**/.env.*local"],
+    "globalEnv": [
+        "VITE_SKIP_ENV_VALIDATION",
+        "VITE_CI",
+        "VITE_API_URL",
+        "VITE_LOCAL_AUTH_BYPASS",
+        "VITE_ADMIN_REDIRECT_URI",
+        "DEV",
+        "NODE_ENV"
+    ],
+    "tasks": {
+        "build": {
+            "dependsOn": ["^build"],
+            "env": ["VITE_API_URL"],
+            "outputs": ["dist/**"]
+        },
+        "lint": {
+            "dependsOn": ["^build"],
+            "outputs": [".cache/.eslintcache"]
+        },
+        "format": {
+            "outputs": [".cache/.prettiercache"]
+        },
+        "pre-build": {
+            "cache": false
+        },
+        "generate-static-assets": {
+            "cache": false
+        },
+        "test": {},
+        "test:watch": {
+            "cache": false
+        },
+        "dev": {
+            "cache": false,
+            "persistent": true,
+            "outputs": ["dist/**"],
+            "inputs": [
+                ".env.development.local",
+                ".env.development",
+                ".env.local",
+                ".env"
+            ]
+        },
+        "typecheck": {
+            "outputs": ["node_modules/.cache/tsbuildinfo.json"]
+        },
+        "preview": {
+            "dependsOn": ["^build"]
+        },
+        "clean": {
+            "cache": false
+        }
+    }
+}

@@ -1,0 +1,93 @@
+name: "🚀 Build and deploy to AKS"
+description: "Common step to build and deploy frontend to AKS"
+
+inputs:
+  azure-credentials:
+    description: "Credentials for Azure CLI"
+    required: true
+  azure-client-id:
+    description: "Federated credentials"
+    required: true
+  azure-tenant-id:
+    description: "Federated credentials"
+    required: true
+  azure-subscription-id:
+    description: "Federated credentials"
+    required: true
+  aks-resource-group:
+    description: "AKS resource group"
+    required: true
+  aks-cluster-name:
+    description: "AKS cluster name"
+    required: true
+  registry-name:
+    description: "Azure Container Registry name"
+    required: true
+  registry-username:
+    description: "Azure Container Registry username"
+    required: true
+  service-principal-secret:
+    description: "Azure Container Registry service principal secret"
+    required: true
+  app-name:
+    description: "Frontend application name"
+    required: true
+  version:
+    description: "Container image version"
+    required: true
+  env-name:
+    description: "Deployment environment"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    # Authenticate with Azure
+    - name: 🛂 Login with Azure OIDC
+      uses: azure/login@v2
+      with:
+        client-id: ${{ inputs.azure-client-id }}
+        tenant-id: ${{ inputs.azure-tenant-id }}
+        subscription-id: ${{ inputs.azure-subscription-id }}
+
+    - name: 🛂 Login to Azure container registry
+      shell: bash
+      run: |
+        ACR_NAME="${{ inputs.registry-name }}"
+        ACR_NAME="${ACR_NAME%%.azurecr.io}"
+        az acr login --name "$ACR_NAME"
+
+    - name: 🔧 Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: 👷‍♂️ Build and push NGINX container
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        file: ./deployment/Dockerfile.nginx
+        push: true
+        tags: |
+          ${{ inputs.registry-name }}/${{ inputs.app-name }}:${{ inputs.version }}
+          ${{ inputs.registry-name }}/${{ inputs.app-name }}:${{ inputs.env-name }}
+        cache-from: type=registry,ref=${{ inputs.registry-name }}/frontend-${{ inputs.app-name }}:${{ inputs.env-name }}
+        cache-to: type=inline
+
+    - name: ⚙️ Set AKS context
+      uses: azure/aks-set-context@v3
+      with:
+        resource-group: ${{ inputs.aks-resource-group }}
+        cluster-name: ${{ inputs.aks-cluster-name }}
+
+    - name: 🔧 Setup kubectl
+      uses: azure/setup-kubectl@v1
+
+    - name: 🚀 Deploy to AKS
+      run: |
+        chmod +x ./deployment/aks-deploy.sh
+        ./deployment/aks-deploy.sh
+      env:
+        APP_NAME: ${{ inputs.app-name }}
+        REGISTRY_NAME: ${{ inputs.registry-name }}
+        IMAGE_NAME: ${{ inputs.app-name }}
+        VERSION: ${{ inputs.version }}
+      shell: bash

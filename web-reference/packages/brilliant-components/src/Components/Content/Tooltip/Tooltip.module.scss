@@ -1,0 +1,53 @@
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: var(--background-color-primary);
+    padding: calc(var(--spacing) * 0.5) calc(var(--spacing) * 1.2);
+    box-shadow: var(--box-shadow-medium);
+    border-radius: var(--border-radius-small);
+    color: var(--accent-color-secondary);
+    position: relative;
+    border: 1px solid var(--background-color-secondary);
+    opacity: 0;
+}
+
+.content[data-state='delayed-open'] {
+    animation-name: fadeIn;
+    animation-duration: var(--transition-default);
+    animation-fill-mode: forwards;
+}
+
+.close {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    color: var(--text-color-tertiary);
+    font-size: 1.2rem;
+    border-radius: 100%;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(110%);
+    }
+    &:focus {
+        color: var(--accent-color-primary);
+    }
+}
+
+.arrow {
+    fill: var(--background-color-primary);
+    height: 0.5rem;
+    width: 1rem;
+}

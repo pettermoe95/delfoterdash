@@ -1,0 +1,301 @@
+.BaseButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-xs);
+    box-sizing: border-box;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+    a {
+        color: inherit;
+        cursor: inherit;
+    }
+    &--disabled {
+        cursor: not-allowed;
+    }
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+.BaseButton--filled {
+    // Variant
+    color: var(--text-white);
+    &-primary {
+        background: var(--button-primary-bg);
+        border-color: var(--button-primary-border);
+        &:hover {
+            background: var(--button-primary-bg-hover);
+            border-color: var(--button-primary-border-hover);
+        }
+        &:focus {
+            box-shadow: var(--ring-brand), var(--shadow-xs);
+        }
+    }
+    &-secondary {
+        background: var(--button-secondary-color-bg);
+        border-color: var(--button-secondary-color-border);
+        &:hover {
+            background: var(--button-secondary-color-bg-hover);
+        }
+    }
+    &-error {
+        background: var(--button-primary-error-bg);
+        border-color: var(--button-primary-error-border);
+        &:hover {
+            background: var(--button-primary-error-bg);
+            border-color: var(--button-primary-error-border);
+        }
+    }
+    &-disabled {
+        background: var(--bg-disabled-subtle);
+        border: 1px solid var(--border-disabled);
+        color: var(--text-disabled);
+        &:hover {
+            background: var(--bg-disabled-subtle);
+            border-color: var(--border-disabled);
+        }
+        &:focus {
+            background: var(--bg-disabled-subtle);
+        }
+    }
+}
+
+.BaseButton--outlined {
+    &-primary {
+        background: var(--button-secondary-brand-bg);
+        border-color: var(--button-secondary-brand-border);
+        color: var(--button-secondary-brand-fg);
+        &:hover {
+            background: var(--button-secondary-brand-bg-hover);
+            border-color: var(--button-secondary-brand-border-hover);
+            color: var(--button-secondary-brand-fg-hover);
+        }
+        &:focus {
+            box-shadow: var(--ring-brand), var(--shadow-xs);
+        }
+    }
+    &-gray {
+        background: var(--button-secondary-gray-bg);
+        border-color: var(--button-secondary-gray-border);
+        color: var(--button-secondary-gray-fg);
+        &:hover {
+            background: var(--button-secondary-gray-bg-hover);
+            border-color: var(--button-secondary-gray-border-hover);
+            color: var(--button-secondary-gray-fg-hover);
+        }
+        &:focus {
+            box-shadow: var(--ring-gray), var(--shadow-xs);
+        }
+    }
+    &-secondary {
+        background: var(--button-secondary-gray-bg);
+        border-color: var(--button-secondary-gray-border);
+        color: var(--button-secondary-gray-fg);
+        &:hover {
+            background: var(--button-secondary-gray-bg-hover);
+            border-color: var(--button-secondary-gray-border-hover);
+            color: var(--button-secondary-gray-fg-hover);
+        }
+        &:focus {
+            box-shadow: var(--ring-gray), var(--shadow-xs);
+        }
+    }
+    &-error {
+        background: var(--button-secondary-error-bg);
+        border-color: var(--button-secondary-error-border);
+        color: var(--button-secondary-error-fg);
+        &:hover {
+            background: var(--button-secondary-error-bg-hover);
+            border-color: var(--button-secondary-error-border-hover);
+            color: var(--button-secondary-error-fg-hover);
+        }
+        &:focus {
+            box-shadow: var(--ring-error), var(--shadow-xs);
+        }
+    }
+    &-disabled {
+        background: var(--button-secondary-brand-bg);
+        border-color: var(--border-disabled);
+        color: var(--text-disabled);
+        &:hover {
+            background: var(--button-secondary-brand-bg);
+            border-color: var(--border-disabled);
+            color: var(--text-disabled);
+        }
+    }
+}
+
+.BaseButton--ghost {
+    border: none;
+    box-shadow: none;
+    &:hover {
+        box-shadow: var(--shadow-xs);
+    }
+    &-primary {
+        color: var(--button-tertiary-brand-fg);
+        background: var(--button-tertiary-gray-bg);
+        &:hover {
+            background: var(--button-tertiary-brand-bg-hover);
+            color: var(--button-tertiary-brand-fg-hover);
+        }
+    }
+
+    &-gray {
+        color: var(--button-tertiary-gray-fg);
+        background: var(--button-tertiary-gray-bg);
+        &:hover {
+            color: var(--button-tertiary-gray-fg-hover);
+            box-shadow: none;
+        }
+    }
+    &-secondary {
+        @extend .BaseButton--ghost-gray;
+    }
+    &-error {
+        color: var(--button-tertiary-error-fg);
+        background: var(--button-tertiary-gray-bg);
+        &:hover {
+            background: var(--button-tertiary-error-bg-hover);
+            color: var(--button-tertiary-error-fg-hover);
+        }
+    }
+    &-disabled {
+        color: var(--text-disabled);
+
+        &:hover {
+            background: var(--button-tertiary-brand-bg);
+            color: var(--text-disabled);
+        }
+    }
+}
+
+:root {
+    /* -- BACKGROUND COLORS */
+    --button-primary-bg: var(--colors-primary-brand-600);
+    --button-primary-bg-hover: var(--colors-primary-brand-700);
+    --button-primary-error-bg: var(--colors-primary-error-600);
+    --button-primary-error-hover: var(--colors-primary-error-700);
+
+    --button-secondary-brand-bg: white;
+    --button-secondary-brand-bg-hover: var(--colors-primary-brand-50);
+    --button-secondary-error-bg: white;
+    --button-secondary-error-bg-hover: var(--colors-primary-error-50);
+    --button-secondary-color-bg: var(--colors-secondary-violet-600);
+    --button-secondary-color-bg-hover: var(--colors-secondary-violet-700);
+    --button-secondary-gray-bg: white;
+    --button-secondary-gray-bg-hover: var(--colors-primary-gray-50);
+    --button-tertiary-error-bg: var(--colors-base-white);
+    --button-tertiary-error-bg-hover: var(--colors-primary-error-50);
+    --button-tertiary-brand-bg: var(--colors-base-white);
+    --button-tertiary-brand-bg-hover: var(--colors-primary-brand-50);
+    --button-tertiary-gray-bg: var(--colors-base-white);
+    --button-tertiary-gray-bg-hover: var(--colors-primary-gray-50);
+    --button-tertiary-bg-hover: var(--colors-primary-error-50);
+    /* -- BORDER COLORS */
+    --button-primary-border: var(--colors-primary-brand-600);
+    --button-primary-border-hover: var(--colors-primary-brand-700);
+    --button-primary-error-border: var(--colors-primary-error-600);
+    --button-primary-error-border: var(--colors-primary-error-700);
+
+    --button-secondary-brand-border: var(--colors-primary-brand-300);
+    --button-secondary-brand-border-hover: var(--colors-primary-brand-300);
+    --button-secondary-gray-border: var(--colors-primary-gray-300);
+    --button-secondary-gray-border-hover: var(--colors-primary-gray-300);
+    --button-secondary-error-border: var(--colors-primary-error-300);
+    --button-secondary-error-border-hover: var(--colors-primary-error-300);
+    --button-secondary-color-border: var(--colors-secondary-violet-600);
+    --button-secondary-color-border-hover: var(--colors-secondary-violet-600);
+    --button-secondary-error-border: var(--colors-primary-error-300);
+    --button-secondary-error-border-hover: var(--colors-primary-error-300);
+    /* -- FOREGROUND COLORS */
+    --button-primary-fg: white;
+    --button-primary-fg-hover: white;
+
+    --button-secondary-brand-fg: var(--colors-primary-brand-700);
+    --button-secondary-brand-fg-hover: var(--colors-primary-brand-700);
+    --button-secondary-error-fg: var(--colors-primary-error-700);
+    --button-secondary-error-fg-hover: var(--colors-primary-error-800);
+    --button-secondary-color-fg: white;
+    --button-secondary-color-fg-hover: white;
+    --button-secondary-gray-fg: var(--colors-primary-gray-600);
+    --button-secondary-gray-fg-hover: var(--colors-primary-gray-700);
+    --button-tertiary-brand-fg: var(--colors-primary-brand-700);
+    --button-tertiary-brand-fg-hover: var(--colors-primary-brand-800);
+    --button-tertiary-error-fg: var(--colors-primary-error-700);
+    --button-tertiary-error-fg-hover: var(--colors-primary-error-800);
+    --button-tertiary-gray-fg: var(--colors-primary-gray-600);
+    --button-tertiary-gray-fg-hover: var(--colors-primary-gray-800);
+    --button-primary-error-fg: white;
+    --button-primary-error-fg-hover: white;
+    --button-tertiary-error-fg: var(--colors-primary-error-700);
+    --button-tertiary-error-fg-hover: var(--colors-primary-error-800);
+}
+
+[data-theme='dark'] {
+    /* -- BACKGROUND COLORS */
+    --button-primary-bg: var(--colors-primary-brand-600);
+    --button-primary-bg-hover: var(--colors-primary-brand-500);
+    --button-primary-error-bg: var(--colors-primary-error-600);
+    --button-primary-error-hover: var(--colors-primary-error-500);
+
+    --button-secondary-brand-bg: var(--colors-primary-gray-dark-950);
+    --button-secondary-brand-bg-hover: var(--colors-primary-brand-900);
+    --button-secondary-error-bg: var(--colors-primary-gray-dark-950);
+    --button-secondary-error-bg-hover: var(--colors-primary-error-900);
+    --button-secondary-color-bg: var(--colors-secondary-violet-800);
+    --button-secondary-color-bg-hover: var(--colors-secondary-violet-700);
+    --button-secondary-gray-bg: var(--colors-primary-gray-dark-950);
+    --button-secondary-gray-bg-hover: var(--colors-primary-gray-dark-800);
+    --button-tertiary-brand-bg: var(--colors-primary-gray-dark-950);
+    --button-tertiary-brand-bg-hover: var(--colors-primary-brand-900);
+    --button-tertiary-error-bg: var(--colors-primary-gray-dark-950);
+    --button-tertiary-error-bg-hover: var(--colors-primary-error-900);
+    --button-tertiary-gray-bg: var(--colors-primary-gray-dark-950);
+    --button-tertiary-gray-bg-hover: var(--colors-primary-gray-dark-800);
+
+    --button-secondary-error-bg: var(--colors-primary-gray-dark-950);
+    --button-secondary-bg-hover: var(--colors-primary-error-800);
+    --button-tertiary-bg-hover: var(--colors-primary-error-800);
+    /* -- BORDER COLORS */
+    --button-primary-border: var(--colors-primary-brand-600);
+    --button-primary-border-hover: var(--colors-primary-brand-500);
+    --button-primary-error-border: var(--colors-primary-error-600);
+    --button-primary-error-border: var(--colors-primary-error-500);
+
+    --button-secondary-brand-border: var(--colors-primary-brand-800);
+    --button-secondary-brand-border-hover: var(--colors-primary-brand-700);
+    --button-secondary-gray-border: var(--colors-primary-gray-600);
+    --button-secondary-gray-border-hover: var(--colors-primary-gray-600);
+    --button-secondary-error-border: var(--colors-primary-error-700);
+    --button-secondary-error-border-hover: var(--colors-primary-error-700);
+    --button-secondary-color-border: var(--colors-secondary-violet-800);
+    --button-secondary-color-border-hover: var(--colors-secondary-violet-700);
+    --button-secondary-error-border: var(--colors-primary-error-800);
+    --button-secondary-error-border-hover: var(--colors-primary-error-700);
+    /* -- FOREGROUND -- */
+    // Primary
+    --button-primary-fg: var(--colors-base-white);
+    --button-primary-fg-hover: var(--colors-base-white);
+
+    --button-secondary-brand-fg: var(--colors-base-white);
+    --button-secondary-brand-fg-hover: var(--colors-base-white);
+    --button-secondary-error-fg: var(--colors-base-white);
+    --button-secondary-error-fg-hover: var(--colors-base-white);
+    --button-secondary-color-fg: var(--colors-base-white);
+    --button-secondary-color-fg-hover: var(--colors-base-white);
+    --button-secondary-gray-fg: var(--colors-primary-gray-dark-200);
+    --button-secondary-gray-fg-hover: var(--colors-primary-gray-dark-100);
+
+    --button-tertiary-brand-fg: var(--colors-base-white);
+    --button-tertiary-brand-fg-hover: var(--colors-base-white);
+    --button-tertiary-error-fg: var(--colors-primary-error-100);
+    --button-tertiary-error-fg-hover: var(--colors-primary-error-50);
+    --button-tertiary-gray-fg: var(--colors-primary-gray-dark-200);
+    --button-tertiary-gray-fg-hover: var(--colors-primary-gray-100);
+    --button-primary-error-fg: var(--colors-base-white);
+    --button-primary-error-fg-hover: var(--colors-base-white);
+    --button-tertiary-error-fg: var(--colors-base-white);
+    --button-tertiary-error-fg-hover: var(--colors-base-white);
+}

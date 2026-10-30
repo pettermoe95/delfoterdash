@@ -1,0 +1,345 @@
+{
+    "src/api/util/http.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/concepts/components/ConceptForm/ConceptFilters/conceptFilterUtils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/concepts/components/ConceptForm/ConceptForm.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 10
+        }
+    },
+    "src/features/concepts/components/ConceptPreview/ConceptPreview.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/features/concepts/components/ConceptsOverview/ConceptsOverview.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 5
+        }
+    },
+    "src/features/concepts/components/SyntaxHighlighter/SyntaxHighlightedInput.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/concepts/components/SyntaxHighlighter/autocompleteHelpers.ts": {
+        "@typescript-eslint/no-non-null-assertion": {
+            "count": 14
+        },
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/concepts/components/SyntaxHighlighter/highlighter.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/concepts/components/SyntaxHighlighter/useAutocomplete.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 3
+        }
+    },
+    "src/features/concepts/utils/filterConceptsByType.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/DashboardMenu/DashboardMenu.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/features/dashboards/components/DashboardMenu/DeleteDashboardMenuItem.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/DashboardsOverview/DashboardGallery.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/DashboardsOverview/DashboardsTable.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/DatePicker/useResolvedColorScheme.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/features/dashboards/components/EditPanel/GraphStudio/GraphStudioPreview.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/AxisForm.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 19
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/FunnelForm.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 21
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/GraphStudio.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 6
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/MetricWithFilter.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/PieForm.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/StatusForm.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/TableForm.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 5
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/TargetWithManualToggle.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/Utils/axisUtils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 3
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/Utils/commonFormHelpers.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 5
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/Utils/commonGraphUtils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 4
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/Utils/compareTextUtils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/Utils/cylinderUtils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 5
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/Utils/funnelUtils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 6
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/Utils/gaugeUtils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 6
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/Utils/graphTransformations.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 10
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/Utils/legendTextHelpers.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/Utils/tableUtils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/features/dashboards/components/EditPanel/NewGraphStudio/Utils/textHelpers.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 3
+        }
+    },
+    "src/features/dashboards/components/EditPanel/Panes/utils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 4
+        }
+    },
+    "src/features/dashboards/components/Filters/DateFilters.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 5
+        }
+    },
+    "src/features/dashboards/components/Filters/FilterValueSelect.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/Filters/GraphFilter.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/features/dashboards/components/Filters/globalFilterUtils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 14
+        }
+    },
+    "src/features/dashboards/components/Forms/EditDashboardIconForm.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/Forms/GraphFormComponents/EditableGraphTitle/EditableGraphTitle.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/GraphBuilder/GeneratedGraphForm.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/GraphBuilder/GeneratedGraphView.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/features/dashboards/components/GraphBuilder/GraphBuilderDialog.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/GraphBuilder/ZebriPromptBubble.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/components/GraphBuilder/useGraphBuilderPrompt.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/hooks/useDashboardById.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/hooks/useDashboardData.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/hooks/useDashboardEditPermission.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/dashboards/hooks/useGraphStudioData.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 7
+        }
+    },
+    "src/features/users/components/UsersTable/UsersTable.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 4
+        }
+    },
+    "src/features/workflows/components/Credentials/CredentialsForm/CredentialsForm.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 4
+        }
+    },
+    "src/features/workflows/components/Credentials/CredentialsTable/EditCredentialsCell.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/workflows/components/Workflows/WorkflowsTable/WorkflowsEnableCell.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/features/workflows/utils/workflowUtils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/filters/factory.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/filters/filters.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 3
+        }
+    },
+    "src/hooks/globalFilterParamUtils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/hooks/query.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/hooks/querySubscriptionManager.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 4
+        }
+    },
+    "src/hooks/useUpdateDashboardFilter.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/site/dashboard/DashboardIndex.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/site/dashboard/dashboardFilterUtils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/site/dashboard/graph/DashboardGraphMenu.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/site/dashboard/graph/DashboardGraphView.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/stores/system.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/utils/conceptSorting.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    }
+}

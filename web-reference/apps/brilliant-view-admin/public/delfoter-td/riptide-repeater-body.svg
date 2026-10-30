@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="192" viewBox="0 0 256 192">
+ <defs><linearGradient id="fur" x2="1" y2="1"><stop stop-color="#bbdee8"/><stop offset="1" stop-color="#487f98"/></linearGradient><linearGradient id="tank" x2="0" y2="1"><stop stop-color="#d6ff94"/><stop offset="1" stop-color="#4b8d44"/></linearGradient></defs>
+ <g stroke="#17394f" stroke-width="4" stroke-linejoin="round">
+  <path d="M81 117Q45 142 28 100L10 88L17 111L7 130Q46 157 89 137Z" fill="#6299ad"/>
+  <rect x="65" y="57" width="25" height="74" rx="10" fill="url(#tank)"/><rect x="89" y="47" width="24" height="81" rx="10" fill="url(#tank)"/>
+  <ellipse cx="123" cy="125" rx="45" ry="37" fill="url(#fur)"/><ellipse cx="128" cy="132" rx="28" ry="28" fill="#def9ef"/>
+  <ellipse cx="96" cy="158" rx="21" ry="9" fill="#679fb0"/><ellipse cx="153" cy="158" rx="21" ry="9" fill="#679fb0"/>
+  <circle cx="102" cy="58" r="13" fill="#78aabc"/><circle cx="149" cy="57" r="13" fill="#78aabc"/>
+  <ellipse cx="126" cy="84" rx="44" ry="36" fill="url(#fur)"/>
+  <path d="M84 76Q126 44 167 73" fill="none" stroke="#b3ed53" stroke-width="11"/>
+  <ellipse cx="143" cy="96" rx="27" ry="17" fill="#edfff4"/><ellipse cx="166" cy="91" rx="7" ry="5" fill="#15384b"/>
+  <ellipse cx="111" cy="80" rx="6" ry="8" fill="#102d40"/><ellipse cx="143" cy="78" rx="6" ry="8" fill="#102d40"/>
+  <circle cx="113" cy="77" r="2" fill="white" stroke="none"/><circle cx="145" cy="75" r="2" fill="white" stroke="none"/>
+  <ellipse cx="102" cy="94" rx="8" ry="4" fill="#f3a4b5" stroke="none"/>
+  <path d="M129 100Q142 112 151 99" fill="none" stroke-width="2"/>
+  <path d="M104 116Q113 100 140 115" fill="none" stroke="#0b6d77" stroke-width="8"/>
+ </g>
+</svg>

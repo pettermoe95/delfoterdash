@@ -1,0 +1,31 @@
+{
+    "name": "@bv/api",
+    "version": "0.3.1",
+    "private": true,
+    "type": "module",
+    "exports": {
+        ".": "./src/index.ts"
+    },
+    "scripts": {
+        "lint": "eslint --max-warnings 0",
+        "clean": "git clean -xdf .cache node_modules dist .turbo",
+        "typecheck": "tsc --noEmit"
+    },
+    "devDependencies": {
+        "@faker-js/faker": "^8.4.1",
+        "@repo/eslint-config": "workspace:*",
+        "@repo/typescript-config": "workspace:*",
+        "@repo/prettier-config": "workspace:*",
+        "prettier": "catalog:",
+        "@types/eslint": "^8.56.5",
+        "@types/node": "catalog:",
+        "eslint": "^9.32.0",
+        "@typescript/native": "catalog:",
+        "typescript": "catalog:"
+    },
+    "dependencies": {
+        "axios": "1.8.4",
+        "zod": "3.23.8"
+    },
+    "prettier": "@repo/prettier-config"
+}

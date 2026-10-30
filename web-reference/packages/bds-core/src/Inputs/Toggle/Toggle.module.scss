@@ -1,0 +1,93 @@
+button {
+    all: unset;
+}
+.toggle {
+    display: flex;
+    justify-items: start;
+    gap: 0.75rem;
+}
+.switchRoot {
+    width: 40px;
+    height: 20px;
+    background-color: #e3e8efbb;
+    cursor: pointer;
+    border-radius: 9999px;
+    position: relative;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.switchRoot:focus {
+    box-shadow: var(--ring-gray);
+}
+.switchRoot:hover {
+    background-color: var(--bg-brand-solid-primary-hover);
+}
+
+.switchRoot[data-state='checked'] {
+    background-color: var(--bg-brand-solid-primary);
+    &:hover {
+        background-color: var(--bg-brand-solid-primary-hover);
+    }
+    &:focus {
+        box-shadow: var(--ring-brand);
+    }
+}
+.switchThumb {
+    display: block;
+    background-color: var(--bg-primary);
+    border-radius: 9999px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 100ms;
+    transform: translateX(2px);
+    will-change: transform;
+}
+.mainText {
+    font-weight: 500;
+}
+.supportingText {
+    font-weight: 400;
+}
+
+.toggle--sm {
+    .switchRoot {
+        width: 40px;
+        height: 20px;
+    }
+    .switchThumb {
+        width: 16px;
+        height: 16px;
+    }
+    .switchThumb[data-state='checked'] {
+        transform: translateX(22px);
+    }
+    .textGroup {
+        font-size: var(--text-size-sm);
+        line-height: 1.25rem;
+    }
+}
+.toggle--md {
+    .switchRoot {
+        width: 48px;
+        height: 24px;
+    }
+    .switchThumb {
+        width: 20px;
+        height: 20px;
+    }
+    .switchThumb[data-state='checked'] {
+        transform: translateX(26px);
+    }
+    .textGroup {
+        font-size: var(--text-size-md);
+        line-height: 1.5rem;
+    }
+}
+.switchRoot[data-disabled] {
+    background-color: var(--bg-secondary-solid);
+    & > .switchThumb {
+        background-color: var(--bg-disabled-subtle);
+    }
+    &:hover {
+        background-color: var(--bg-secondary-solid);
+        cursor: not-allowed;
+    }
+}

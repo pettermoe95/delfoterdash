@@ -1,0 +1,75 @@
+.AvatarRoot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    overflow: hidden;
+    user-select: none;
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+    border-radius: var(--border-radius-full);
+    background-color: var(--avatar-bg);
+    border: 0.5px solid var(--avatar-contrast-border);
+    flex-shrink: 0;
+}
+.AvatarRoot:focus {
+    border: 2px solid var(--avatar-focus-border);
+}
+
+.AvatarImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+.AvatarFallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--avatar-placeholder-fg);
+    font-size: var(--avatar-icon-size);
+    line-height: 1;
+    font-weight: 500;
+}
+.AvatarInitials {
+    font: var(--avatar-initials-font);
+}
+
+.AvatarRoot {
+    // Default is md
+    --avatar-size: 40px;
+    --avatar-icon-size: 32px;
+    --avatar-initials-font: var(--text-font-md-regular);
+    &--lg {
+        --avatar-size: 48px;
+        --avatar-icon-size: 40px;
+        --avatar-initials-font: var(--text-font-xl-regular);
+    }
+    &--sm {
+        --avatar-size: 32px;
+        --avatar-icon-size: 24px;
+        --avatar-initials-font: var(--text-font-sm-regular);
+    }
+    &--xs {
+        --avatar-size: 24px;
+        --avatar-icon-size: 16px;
+        --avatar-initials-font: var(--text-font-xs-regular);
+    }
+}
+
+:root {
+    --avatar-bg: var(--colors-primary-gray-50);
+    --avatar-contrast-border: var(--colors-primary-gray-200);
+    --avatar-focus-border: var(--colors-primary-brand-100);
+    --avatar-placeholder-fg: var(--colors-primary-gray-500);
+}
+
+[data-theme='dark'] {
+    --avatar-bg: var(--colors-primary-gray-dark-900);
+    --avatar-contrast-border: var(--colors-primary-gray-dark-700);
+    --avatar-focus-border: var(--colors-primary-brand-800);
+    --avatar-placeholder-fg: var(--colors-primary-gray-dark-400);
+}

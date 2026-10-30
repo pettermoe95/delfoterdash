@@ -1,0 +1,105 @@
+$tooltip-max-width: 600px;
+$tooltip-max-height: 500px;
+$tooltip-viewport-padding: 16px;
+$tooltip-margin-bottom: 8px;
+$arrow-size: 10px;
+
+@keyframes animate-in {
+    0% {
+        transform: translateY(2px);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes animate-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.tooltip {
+    pointer-events: auto;
+    background: none !important;
+    box-shadow: none !important;
+    max-width: 0;
+    max-height: 0 !important;
+    padding: 0 !important;
+    margin: 0;
+    z-index: 100;
+
+    opacity: 0;
+    animation-name: animate-in;
+    animation-duration: 0.1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+.animate_out {
+    opacity: 1;
+    animation-name: animate-out;
+    animation-duration: 0.15s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+    animation-delay: 0.4s;
+}
+
+.tooltip_wrapper {
+    pointer-events: auto;
+    // Container for tooltip data
+    z-index: 999;
+    width: max-content;
+    max-width: min(
+        $tooltip-max-width,
+        calc(100vw - 2 * $tooltip-viewport-padding)
+    );
+    max-height: min(
+        $tooltip-max-height,
+        calc(100vh - 2 * $tooltip-viewport-padding)
+    );
+
+    // Transform to origin on arrow
+    transform: translate(-50%, calc(-100% - $tooltip-margin-bottom));
+
+    // Alignment of box/arrow inside
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.tooltip_box {
+    display: flex;
+    padding: 0.5em 1em;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 0.5em;
+    box-shadow: 0 3px 6px 3px rgba(black, 0.1);
+    border-color: var(--border-color-primary);
+    color: var(--text-color-primary);
+    background-color: var(--background-color-primary);
+}
+
+.tooltip_box_scrolled {
+    padding-right: 0;
+}
+
+.arrow_container {
+    display: flex;
+    justify-content: center;
+    height: $arrow-size;
+    z-index: 999;
+}
+
+.arrow,
+.arrow_svg {
+    width: $arrow-size;
+    height: $arrow-size;
+    overflow: visible;
+}

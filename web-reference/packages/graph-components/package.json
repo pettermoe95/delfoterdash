@@ -1,0 +1,73 @@
+{
+    "name": "@bv/graph-components",
+    "version": "0.5.3",
+    "private": true,
+    "type": "module",
+    "exports": {
+        ".": "./src/index.ts"
+    },
+    "scripts": {
+        "lint": "eslint . --max-warnings 0",
+        "format": "prettier --check . --ignore-path ../../.gitignore",
+        "clean": "git clean -xdf node_modules dist .turbo .cache",
+        "typecheck": "tsc --noEmit",
+        "test": "vitest run",
+        "test:watch": "vitest --watch"
+    },
+    "devDependencies": {
+        "@repo/eslint-config": "workspace:^",
+        "@repo/prettier-config": "workspace:*",
+        "@repo/typescript-config": "workspace:*",
+        "@storybook/react": "^7.6.16",
+        "@tanstack/react-table": "catalog:",
+        "@turbo/gen": "^1.12.4",
+        "@types/eslint": "^8.56.5",
+        "@types/lodash": "^4.17.4",
+        "@types/node": "catalog:",
+        "@types/react": "catalog:",
+        "@types/react-dom": "catalog:",
+        "clsx": "^2.1.0",
+        "eslint": "^9.32.0",
+        "prettier": "catalog:",
+        "react": "catalog:",
+        "react-dom": "catalog:",
+        "react-use": "catalog:",
+        "sass": "^1.77.2",
+        "@typescript/native": "catalog:",
+        "typescript": "catalog:",
+        "vitest": "catalog:"
+    },
+    "dependencies": {
+        "@brilliant/bds-core": "workspace:*",
+        "@brilliant/components": "workspace:*",
+        "@bv/design-tokens": "workspace:*",
+        "@bv/i18n-utils": "workspace:*",
+        "@fontsource/roboto-mono": "5.0.18",
+        "@visx/axis": "3.10.1",
+        "@visx/clip-path": "3.3.0",
+        "@visx/curve": "3.3.0",
+        "@visx/event": "3.3.0",
+        "@visx/gradient": "3.3.0",
+        "@visx/group": "3.3.0",
+        "@visx/mock-data": "3.3.0",
+        "@visx/responsive": "3.10.2",
+        "@visx/scale": "3.5.0",
+        "@visx/shape": "3.5.0",
+        "@visx/text": "3.3.0",
+        "@visx/tooltip": "3.12.0",
+        "@visx/vendor": "3.5.0",
+        "@visx/visx": "3.10.4",
+        "color": "5.0.0",
+        "date-fns": "2.30.0",
+        "lodash": "4.17.21"
+    },
+    "peerDependencies": {
+        "@storybook/react": "^7.6.16",
+        "@tanstack/react-table": "catalog:",
+        "react": "catalog:",
+        "react-dom": "catalog:",
+        "react-use": "catalog:",
+        "@react-hook/resize-observer": "catalog:"
+    },
+    "prettier": "@repo/prettier-config"
+}

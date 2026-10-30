@@ -1,0 +1,35 @@
+name: 🏄 Release Admin Panel
+
+on:
+  push:
+    tags:
+      - brilliant-view-admin@[0-9]+.[0-9]+.[0-9]+
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        description: Environment to build and publish
+        default: test
+        type: choice
+        options:
+          - development
+          - production
+          - test
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-release_admin_panel
+  cancel-in-progress: true
+
+jobs:
+  release-admin-panel:
+    name: Release Admin Panel
+    uses: ./.github/workflows/base_deploy_frontend.yml
+    secrets: inherit
+    with:
+      app-name: brilliant-view-admin
+      image-name: admin-panel
+      environment: ${{ github.event_name == 'push' && 'test' || github.event.inputs.environment }}

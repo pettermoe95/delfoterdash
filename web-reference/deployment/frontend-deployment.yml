@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-__APP_NAME__
+  namespace: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-__APP_NAME__
+  template:
+    metadata:
+      labels:
+        app: frontend-__APP_NAME__
+    spec:
+      containers:
+        - name: brilliant-view-api
+          image: __REGISTRY__/__IMAGE__:__TAG__
+          imagePullPolicy: Always
+
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
+              name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-__APP_NAME__
+  namespace: frontend
+spec:
+  selector:
+    app: frontend-__APP_NAME__
+  ports:
+    - port: 8084
+      targetPort: 80
+      name: http
+  type: ClusterIP

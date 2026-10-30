@@ -1,0 +1,66 @@
+{
+    "name": "@brilliant/bds-core",
+    "version": "0.5.2",
+    "private": true,
+    "type": "module",
+    "exports": {
+        ".": "./src/index.ts",
+        "./styles.css": "./dist/styles.css"
+    },
+    "scripts": {
+        "lint": "eslint . --max-warnings 0",
+        "format": "prettier --check . --ignore-path ../../.gitignore",
+        "build": "tailwindcss -i ./src/styles.css -o ./dist/styles.css",
+        "dev": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --watch",
+        "generate-static-assets": "vite build",
+        "clean": "git clean -xdf node_modules dist .turbo .cache",
+        "typecheck": "tsc --noEmit"
+    },
+    "devDependencies": {
+        "@brilliant/components": "workspace:*",
+        "@bv/api": "workspace:*",
+        "@bv/design-tokens": "workspace:*",
+        "@iconify/react": "^4.1.1",
+        "@radix-ui/react-select": "^1.2.1",
+        "@repo/eslint-config": "workspace:*",
+        "@repo/prettier-config": "workspace:*",
+        "@repo/typescript-config": "workspace:*",
+        "@types/eslint": "^8.56.5",
+        "@types/node": "catalog:",
+        "@types/react": "catalog:",
+        "@types/react-dom": "catalog:",
+        "autoprefixer": "^10.4.19",
+        "class-variance-authority": "^0.7.0",
+        "clsx": "^2.1.1",
+        "eslint": "^9.32.0",
+        "postcss": "^8.4.38",
+        "prettier": "catalog:",
+        "react": "catalog:",
+        "tailwind-merge": "^2.3.0",
+        "tailwindcss": "catalog:",
+        "tailwindcss-animate": "^1.0.7",
+        "@typescript/native": "catalog:",
+        "typescript": "catalog:",
+        "vite": "catalog:"
+    },
+    "peerDependencies": {
+        "@iconify/react": "^4.1.1",
+        "class-variance-authority": "^0.7.0"
+    },
+    "dependencies": {
+        "@bv/i18n-utils": "workspace:*",
+        "@radix-ui/react-alert-dialog": "1.1.1",
+        "@radix-ui/react-avatar": "1.0.4",
+        "@radix-ui/react-checkbox": "1.0.4",
+        "@radix-ui/react-dialog": "1.1.1",
+        "@radix-ui/react-dropdown-menu": "2.1.1",
+        "@radix-ui/react-label": "2.0.2",
+        "@radix-ui/react-popover": "1.0.7",
+        "@radix-ui/react-radio-group": "1.2.1",
+        "@radix-ui/react-slot": "1.0.2",
+        "@radix-ui/react-switch": "1.0.3",
+        "@radix-ui/react-tooltip": "1.0.7",
+        "@tanstack/react-virtual": "3.10.8"
+    },
+    "prettier": "@repo/prettier-config"
+}

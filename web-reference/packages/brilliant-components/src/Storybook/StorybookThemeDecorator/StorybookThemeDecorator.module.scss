@@ -1,0 +1,109 @@
+/* stylelint-disable */
+
+.decorator_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-height: calc(100% - 8em);
+    height: calc(100% - 8em);
+    padding: 1em;
+    padding-bottom: 7em;
+    width: calc(100% - 2em);
+}
+
+.child_wrapper {
+    padding: 1em;
+    width: calc(100% - 2em);
+    height: calc(100% - 2em);
+    min-height: calc(100% - 2em);
+}
+
+.tools {
+    display: flex;
+    gap: 2em;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: white;
+    color: black;
+    padding: 1em;
+    border-radius: 0 1em 0 0;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-bottom: none;
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.05);
+}
+
+.tools.fixed {
+    position: fixed;
+}
+
+.tool_divider {
+    min-height: 100%;
+    width: 1px;
+    background-color: #ddd;
+}
+
+.brilliant_logo {
+    height: 12px;
+    margin-bottom: 0.75em;
+}
+
+.option_column {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75em;
+    gap: 0.3em;
+}
+
+.option_row {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5em;
+    gap: 1em;
+}
+
+.background_button {
+    min-width: 1.5rem;
+    min-height: 1.5rem;
+    background-color: var(--background-color-primary);
+    border-radius: 0.3em;
+    border: 1px solid black;
+    transition: 0.2s;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--background-color-secondary);
+        transform: scale(1.05);
+    }
+}
+
+.button_selected {
+    width: 100%;
+    height: 2px;
+    background-color: #5b9bda;
+    margin-top: 0.4em;
+}
+
+.look_button {
+    text-transform: capitalize;
+    border: 1px solid #ddd;
+    padding: 0.2em 1em;
+    border-radius: var(--border-radius-primary);
+    color: black;
+    cursor: pointer;
+    &:hover {
+        filter: brightness(70%);
+    }
+}
+
+.transparency_button {
+    border: 2px dotted black;
+    background-color: var(--background-color-secondary);
+    &.enabled {
+        background-color: transparent;
+        border: 2px dashed black;
+    }
+}

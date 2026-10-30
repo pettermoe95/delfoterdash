@@ -1,0 +1,17 @@
+.TextGroup,
+.TextGroup--md {
+    font-size: var(--text-size-md);
+    line-height: 1.5rem;
+}
+
+.TextGroup--sm {
+    font-size: var(--text-size-sm);
+    line-height: 1.25rem;
+}
+
+.MainText {
+    font-weight: 500;
+}
+.SupportingText {
+    font-weight: 400;
+}

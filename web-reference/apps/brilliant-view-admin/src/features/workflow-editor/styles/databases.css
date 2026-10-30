@@ -1,0 +1,64 @@
+.we-database-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-block: 12px;
+}
+.we-worker-database .we-database-manage {
+    display: block;
+    margin-top: 16px;
+}
+.we-databases-dialog {
+    width: min(800px, 94vw);
+}
+.we-databases-dialog fieldset {
+    border: 0;
+    padding: 0;
+    min-width: 0;
+}
+.we-databases-layout {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 20px;
+    margin-top: 16px;
+}
+.we-databases-layout > nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.we-databases-layout > nav button {
+    text-align: left;
+    overflow-wrap: anywhere;
+}
+.we-databases-layout > nav [aria-pressed='true'] {
+    color: var(--text-brand-primary);
+    background: var(--bg-brand-primary);
+    border-color: var(--border-brand-primary-solid);
+}
+.we-databases-dialog input:not([type='checkbox']),
+.we-databases-dialog select {
+    width: 100%;
+    min-width: 0;
+    padding: 7px 9px;
+    border: 1px solid var(--border-primary);
+    border-radius: 6px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font: inherit;
+    appearance: auto;
+}
+.we-databases-dialog input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+    appearance: auto;
+}
+.we-connection-errors {
+    margin-block: 12px;
+    font-size: 12px;
+}
+@media (max-width: 600px) {
+    .we-databases-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

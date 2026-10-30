@@ -1,0 +1,177 @@
+@import './base.css';
+@import './layout.css';
+@import './canvas.css';
+@import './properties.css';
+@import './compact-properties.css';
+@import './collections.css';
+@import './databases.css';
+@import './timeline.css';
+
+.we-statusbar {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 16px;
+    border-top: 1px solid var(--border-secondary, #e3e8ef);
+    background: var(--bg-primary);
+    color: var(--text-tertiary);
+    font-size: 10px;
+}
+.we-statusbar button {
+    padding: 2px 8px;
+    font-size: 10px;
+}
+.we-activity {
+    flex-shrink: 0;
+    overflow: auto;
+    padding: 14px 20px;
+    border-top: 1px solid var(--border-secondary, #e3e8ef);
+    background: var(--bg-primary);
+}
+.we-activity-resize {
+    height: 8px;
+    flex-shrink: 0;
+    cursor: row-resize;
+    touch-action: none;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-primary);
+}
+.we-activity-resize::after {
+    content: '';
+    width: 40px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--border-primary);
+}
+.we-activity-resize:hover::after,
+.we-activity-resize:focus-visible::after {
+    background: var(--bg-brand-solid-primary);
+}
+.we-activity-resize:focus-visible {
+    outline: 2px solid var(--bg-brand-solid-primary);
+    outline-offset: -2px;
+}
+.we-activity time {
+    color: var(--text-tertiary);
+    margin-right: 12px;
+}
+.we-activity-entry {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-block: 6px;
+    min-width: 0;
+}
+.we-activity-entry > time,
+.we-activity-entry > .nodrag {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+.we-activity-message {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.we-dialog {
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-primary, #cdd5df);
+    border-radius: 12px;
+    padding: 24px;
+    width: min(800px, 90vw);
+    max-height: 85vh;
+    overflow: auto;
+    font: inherit;
+}
+.we-dialog::backdrop {
+    background: #0006;
+}
+.we-dialog pre {
+    overflow: auto;
+    background: var(--bg-secondary);
+    padding: 16px;
+    font-size: 12px;
+}
+.we-dialog a {
+    cursor: pointer;
+}
+.we-run-dialog {
+    width: min(440px, 90vw);
+}
+.we-run-dialog h2 {
+    font-size: 22px;
+    line-height: 1.3;
+}
+.we-run-dialog > p {
+    margin-top: 16px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+.we-run-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 24px;
+}
+.we-run-actions button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 42px;
+    font-weight: 600;
+}
+.we-run-label,
+.we-run-loading {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.we-run-label[aria-hidden='true'] {
+    visibility: hidden;
+}
+.we-run-loading {
+    position: absolute;
+    inset: 0;
+}
+.we-run-dialog .we-run-secondary {
+    border-color: var(--bg-brand-solid-primary);
+    background: var(--bg-brand-primary);
+    color: var(--text-brand-primary);
+}
+.we-run-dialog .we-run-secondary:hover {
+    background: var(--bg-brand-secondary);
+}
+.we-run-dialog .we-run-cancel {
+    border-color: transparent;
+    background: transparent;
+    font-weight: 400;
+}
+.we-run-dialog .we-run-cancel:hover {
+    background: var(--bg-primary-hover);
+}
+.we-loading {
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+@media (max-width: 1100px) {
+    .we-palette {
+        flex-basis: 190px;
+    }
+    .we-properties {
+        flex-basis: 320px;
+    }
+    .we-title {
+        max-width: 100%;
+    }
+}

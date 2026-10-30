@@ -1,0 +1,36 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: var(--background-color-primary);
+    padding: calc(var(--spacing) * 1.25) calc(var(--spacing) * 1.75);
+    box-shadow: var(--box-shadow-large);
+    border-radius: var(--border-radius-small);
+    color: var(--text-color-primary);
+    position: relative;
+    border: 1px solid var(--background-color-secondary);
+}
+
+.close {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    color: var(--text-color-tertiary);
+    font-size: 1.2rem;
+    border-radius: 100%;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(110%);
+    }
+    &:focus {
+        color: var(--accent-color-primary);
+    }
+}
+
+.arrow {
+    fill: var(--background-color-primary);
+    height: 0.5rem;
+    width: 1rem;
+}

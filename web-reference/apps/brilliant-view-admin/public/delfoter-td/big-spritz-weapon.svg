@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="192" viewBox="0 0 256 192">
+ <defs><linearGradient id="fur" x2="1" y2="1"><stop stop-color="#bbdee8"/><stop offset="1" stop-color="#487f98"/></linearGradient><linearGradient id="tank" x2="0" y2="1"><stop stop-color="#76fff0"/><stop offset="1" stop-color="#087b84"/></linearGradient></defs>
+ <g stroke="#17394f" stroke-width="4" stroke-linejoin="round">
+  <rect x="133" y="110" width="72" height="29" rx="8" fill="#15b8b0"/><path d="M151 139L145 155H160L169 137" fill="#0d6f7e"/>
+  <rect x="195" y="105" width="28" height="38" rx="6" fill="#254b5c"/><ellipse cx="224" cy="124" rx="9" ry="16" fill="#8af9ed"/>
+  <path d="M145 118H188M145 129H188" stroke="#adffeb" stroke-width="3"/><ellipse cx="134" cy="128" rx="12" ry="9" fill="#a7d0dc"/>
+ </g>
+</svg>

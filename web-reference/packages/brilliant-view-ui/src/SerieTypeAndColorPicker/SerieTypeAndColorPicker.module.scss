@@ -1,0 +1,114 @@
+.serieTypeAndColorPicker {
+    @apply flex-col gap-sm text-lg font-bold text-gray-900;
+}
+
+.menuContent {
+    [data-name='type'] {
+        display: flex;
+        padding: var(--spacing-md, 8px) var(--spacing-lg, 12px);
+        align-items: center;
+        gap: var(--spacing-lg, 12px);
+        align-self: stretch;
+    }
+
+    [data-name='color'] {
+        @apply grid grid-cols-4 p-xl;
+    }
+}
+
+.chartColorSelectButton {
+    position: relative;
+    cursor: pointer;
+
+    > svg {
+        height: var(--height-3-xl, 24px);
+        width: var(--width-3-xl, 24px);
+    }
+
+    > span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: var(--height-3-xl, 24px);
+        width: var(--width-3-xl, 24px);
+        fill: var(--color-gray-500, #6b7280);
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        svg {
+            color: #fff;
+        }
+    }
+
+    &[data-selected='false'] {
+        > span {
+            display: none;
+        }
+    }
+}
+
+.chartTypeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+
+    border: none;
+    box-shadow: none;
+
+    width: 42px;
+    min-height: 42px;
+    aspect-ratio: 1/1;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &[data-selected='true'] {
+        > div {
+            background-color: var(--chart-type-color, inherit);
+        }
+    }
+
+    &:hover {
+        box-shadow: var(--shadow-xs);
+    }
+
+    &:disabled {
+        color: var(--text-disabled);
+    }
+
+    &:focus {
+        background: var(--bg-primary, #fff);
+
+        --tw-shadow: 0px 0px 0px 2px #4d88f03d;
+        --tw-shadow-colored: 0px 0px 0px 2px var(--tw-shadow-color);
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+            var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    }
+
+    &[data-selected='true'] {
+        box-shadow: var(--shadow-xs);
+    }
+}
+
+.colorIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.colorOnlyTrigger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    min-height: 42px;
+    aspect-ratio: 1/1;
+    border-radius: 6px;
+}
+
+.colorOnlySwatch {
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+}

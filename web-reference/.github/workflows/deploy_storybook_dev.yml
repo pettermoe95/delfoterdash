@@ -1,0 +1,43 @@
+name: 🚀 Deploy Storybook DEV
+
+on:
+  push:
+    branches:
+      - release_dev
+    paths:
+      - "deploy_storybook_dev.yml"
+      - "apps/design-docs/**"
+      - "packages/**"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-deploy_storybook
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: self-hosted
+    environment:
+      name: development
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+      - name: 🔧 Setup
+        uses: ./tooling/github/setup
+      - name: 👷‍♂️ Build
+        run: turbo build --filter design-docs
+      - name: 🚀 Deploy to Azure SWA
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_SWA_DESIGN_SYSTEM_DEPLOYMENT_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          skip_app_build: true
+          skip_api_build: true
+          app_location: "apps/design-docs/storybook-static"

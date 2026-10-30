@@ -1,0 +1,43 @@
+{
+    "name": "brilliant_view_monorepo",
+    "type": "module",
+    "private": true,
+    "scripts": {
+        "build": "turbo build",
+        "preview": "turbo preview",
+        "pre-build": "turbo build --filter @brilliant/components && turbo generate-static-assets",
+        "generate-static-assets": "turbo generate-static-assets",
+        "lint": "turbo run lint",
+        "dev": "turbo dev",
+        "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
+        "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
+        "clean": "turbo clean",
+        "reset": "pnpm clean && pnpm install && pnpm pre-build",
+        "typecheck": "turbo typecheck",
+        "storybook": "pnpm run --filter @brilliant/components storybook",
+        "test": "turbo run test",
+        "test:watch": "turbo run test:watch",
+        "run-pr-ci": "gh act -j build_and_lint --container-architecture linux/amd64"
+    },
+    "devDependencies": {
+        "@repo/eslint-config": "workspace:*",
+        "@repo/typescript-config": "workspace:*",
+        "@typescript/native": "catalog:",
+        "prettier": "catalog:",
+        "turbo": "2.1.3"
+    },
+    "packageManager": "pnpm@9.5.0",
+    "engines": {
+        "node": ">=18"
+    },
+    "pnpm": {
+        "overrides": {
+            "@tanstack/react-query": "5.84.1",
+            "@tanstack/query-core": "5.83.1",
+            "esbuild": "0.27.2"
+        }
+    },
+    "volta": {
+        "node": "20.13.1"
+    }
+}

@@ -1,0 +1,38 @@
+@import '../../../style/mixins';
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--border-radius-small);
+    background-color: var(--background-color-primary);
+    overflow: hidden;
+    width: auto;
+    max-height: 100%;
+    height: 100%;
+
+    padding: var(--spacing);
+    box-sizing: border-box;
+}
+
+.header {
+    min-height: 1em;
+    max-height: 1em;
+    border-bottom: var(--border-width-small) inherit var(--border-color-tertiary);
+    padding-bottom: var(--spacing);
+    align-self: stretch;
+    overflow: hidden;
+    box-sizing: content-box;
+    font: var(--text-font-sm-medium);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: auto;
+    flex: 1;
+}
+
+.content_full {
+    padding: 0;
+}

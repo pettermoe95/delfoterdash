@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="192" viewBox="0 0 512 192">
+  <defs>
+    <filter id="red-glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2" result="glow"/><feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <linearGradient id="hull" x2="0" y2="1"><stop stop-color="#475565"/><stop offset="1" stop-color="#070c16"/></linearGradient>
+    <linearGradient id="cabin" x2="0" y2="1"><stop stop-color="#d5e0e8"/><stop offset="1" stop-color="#667688"/></linearGradient>
+    <g id="crew" stroke="#112239" stroke-width="2" stroke-linejoin="round">
+      <path d="M-12 8V-7L-8-17L-2-10L6-17L12-6V8Z" fill="#5d778d"/>
+      <path d="M-9-5H9V3H-9Z" fill="#122032"/>
+      <path d="M-7-3L-2 0L-7 1M3 0L8-3V1" stroke="#ff426a" fill="#ff426a" stroke-width="1.5"/>
+      <path d="M-8 8H8V18H-8Z" fill="#344e63"/>
+    </g>
+    <g id="boat" stroke="#070d18" stroke-width="3" stroke-linejoin="round">
+      <ellipse cx="130" cy="157" rx="104" ry="8" fill="#052a4699" stroke="none"/>
+      <path d="M24 114L12 98L36 105M226 113L249 96L240 120" fill="#c6d6e3"/>
+      <!-- Aft mast, boom, rigging and the Norwegian flag. -->
+      <path d="M68 108V20M68 41L133 55" fill="none" stroke="#a9b4ad" stroke-width="5"/>
+      <path d="M68 36L32 109M68 36L126 107" fill="none" stroke="#70959d" stroke-width="1.5"/>
+      <path d="M70 20H108V44H70Z" fill="#e73341" stroke="#fbe6c5" stroke-width="1"/>
+      <path d="M82 20V44M70 31H108" stroke="#fff" stroke-width="7"/>
+      <path d="M82 20V44M70 31H108" stroke="#123b81" stroke-width="3.5"/>
+      <path d="M80 55L88 42L96 57L104 45L111 62" fill="#b7c9d7"/>
+      <!-- An open deck full of very suspicious passengers. -->
+      <path d="M24 111L39 96H172L220 114V127H24Z" fill="#141c2b"/>
+      <use href="#crew" transform="translate(43 95)"/>
+      <use href="#crew" transform="translate(72 99)"/>
+      <use href="#crew" transform="translate(101 94)"/>
+      <path d="M25 108H127M31 99V119M58 102V120M89 101V120M119 102V119" fill="none" stroke="#a5b9c9" stroke-width="3"/>
+      <!-- Forward wheelhouse, orange roof, antenna and navigation lamp. -->
+      <path d="M127 113V64L145 50H192L207 69V116Z" fill="url(#cabin)"/>
+      <path d="M123 64L141 46H196L212 64Z" fill="#172334"/>
+      <path d="M162 46V22M162 31L182 26" fill="none" stroke="#b7c8c8" stroke-width="3"/>
+      <circle cx="162" cy="20" r="4" fill="#ff264c" stroke-width="1.5"/>
+      <path d="M138 70H158V92H138ZM165 70H192L199 92H165Z" fill="#030a12"/>
+      <path d="M140 73L155 88M169 73L190 87" stroke="#637d91" stroke-width="2"/>
+      <path d="M175 81L182 84L175 86M185 84L192 81V86" fill="#ff3861" stroke="#ff3861" stroke-width="1.5"/>
+      <path d="M135 71L157 77L155 86L135 79M168 77L195 69L196 80L169 86" fill="#ff244f" stroke="#ff6d82" stroke-width="1.5" filter="url(#red-glow)"/>
+      <path d="M133 65L156 72M168 71L195 63" fill="none" stroke="#172334" stroke-width="4"/>
+      <path d="M141 99H155V115H141Z" fill="#859b9b" stroke-width="1.5"/>
+      <!-- The stout, rounded hull and raised bow of a little fishing boat. -->
+      <path d="M15 116Q81 128 151 120L240 104L232 127Q220 153 196 157H64Q32 151 15 116Z" fill="url(#hull)"/>
+      <path d="M23 125Q106 138 232 115" fill="none" stroke="#d0e0eb" stroke-width="4"/>
+      <path d="M43 144Q128 154 211 142" fill="none" stroke="#90a8bb" stroke-width="5"/>
+      <path d="M52 128L59 146L90 148L86 132M151 127L154 149L181 143L184 121" fill="#9baebd" stroke="#1c2c3b" stroke-width="2"/>
+      <path d="M68 133V141M75 133V142M161 131V141M169 129V139" stroke="#101b28" stroke-width="2"/>
+      <circle cx="115" cy="135" r="11" fill="#1d3543"/><circle cx="115" cy="135" r="5" fill="#466270" stroke-width="1"/>
+      <circle cx="194" cy="129" r="10" fill="#1d3543"/><circle cx="194" cy="129" r="4" fill="#466270" stroke-width="1"/>
+      <path d="M58 112Q48 91 37 112Q50 105 58 112M63 115Q73 96 85 115Q76 106 63 115" fill="none" stroke="#849aaa" stroke-width="3"/>
+      <text x="139" y="141" text-anchor="middle" stroke="none" fill="#fff1bc" font-family="sans-serif" font-weight="900" font-size="9">REAPER · 30</text>
+    </g>
+  </defs>
+  <use href="#boat"/>
+  <g transform="translate(256)">
+    <use href="#boat"/>
+    <path d="M24 160Q39 153 52 160M197 161Q212 153 229 159" fill="none" stroke="#ff426d" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="162" cy="20" r="6" fill="#ff264c" opacity=".7"/>
+  </g>
+</svg>

@@ -1,0 +1,44 @@
+{
+  "plugins": [
+    "stylelint-declaration-strict-value"
+  ],
+  "customSyntax": "postcss-scss",
+  "rules": {
+    "color-no-invalid-hex": true,
+    "unit-allowed-list": [
+      "px",
+      "em",
+      "rem",
+      "deg",
+      "%",
+      "s"
+    ],
+    "property-disallowed-list": [
+      "declaration"
+    ],
+    "scale-unlimited/declaration-strict-value": [
+      [
+        "/.*color.*$/",
+        "/.*border.*$/",
+        "/.*padding.*$/",
+        "/.*background.*$/",
+        "/.*shadow.*$/",
+        "/.*outline.*$/",
+        "/.*font-family.*$/",
+        "/.*margin.*$/",
+        "/.*gap.*$/",
+        "/.*transition.*$/"
+      ],
+      {
+        "ignoreValues": [
+            "inherit",
+            "solid",
+            "none",
+            "transparent"
+        ],
+        "ignoreVariables": true,
+        "ignoreFunctions": false
+      }
+    ]
+  }
+}

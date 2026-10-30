@@ -1,0 +1,154 @@
+name: PR notification
+
+on:
+  pull_request:
+    types: [opened]
+    branches:
+      - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Parse Linear ID from branch name
+        run: |
+          LOWER_BRANCH="$(echo "${{github.event.pull_request.head.ref}}" | tr '[:upper:]' '[:lower:]')"
+          BRI_SLUG="$(echo "$LOWER_BRANCH" | grep -Eo 'bri-[0-9]{3,4}-' || true)"
+
+          if [ -n "$BRI_SLUG" ]; then
+            LINEAR_ID="$(echo "$BRI_SLUG" | sed -E 's/^bri-([0-9]{3,4})-$/BRI-\1/I')"
+            echo "LINEAR_ID=$LINEAR_ID" >> $GITHUB_ENV
+            echo "HAS_LINEAR_ID=true" >> $GITHUB_ENV
+          else
+            echo "HAS_LINEAR_ID=false" >> $GITHUB_ENV
+          fi
+
+      - name: Lookup Linear issue
+        if: env.HAS_LINEAR_ID == 'true'
+        env:
+          LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+        run: |
+          QUERY="{\"query\":\"query Issue { issue(id: \\\"$LINEAR_ID\\\") { id title url description } }\"}"
+
+          echo "$QUERY"
+
+          RESPONSE=$(curl -sS -X POST https://api.linear.app/graphql \
+            -H "Content-Type: application/json" \
+            -H "Authorization: $LINEAR_API_KEY" \
+            -d "$QUERY")
+
+          echo "$RESPONSE"
+
+          TITLE=$(echo "$RESPONSE" | jq -r '.data.issue.title // empty')
+          URL=$(echo "$RESPONSE" | jq -r '.data.issue.url // empty')
+
+          if [ -n "$TITLE" ] && [ -n "$URL" ]; then
+            echo "LINEAR_TITLE=$TITLE" >> $GITHUB_ENV
+            echo "LINEAR_URL=$URL" >> $GITHUB_ENV
+            echo "LINEAR_FOUND=true" >> $GITHUB_ENV
+          else
+            echo "LINEAR_FOUND=false" >> $GITHUB_ENV
+          fi
+
+      - name: Notify teams chat
+        env:
+          WEBHOOK_URL: ${{ secrets.TEAMS_PR_WEBHOOK_URL }}
+        run: |
+          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+          if [ "${LINEAR_FOUND}" = "false" ]; then
+            LINEAR_URL="https://linear.app/brilliant-products/team/BRI/active"
+            LINEAR_TITLE=""
+          fi
+          jq -n \
+            --arg repo "${{github.repository}}" \
+            --arg repo_name "[${REPO_NAME}](https://github.com/${{github.repository}})" \
+            --arg branch_name "[${{github.event.pull_request.head.ref}}](https://github.com/${{github.repository}}/tree/${{github.event.pull_request.head.ref}})" \
+            --arg prtitle "${{github.event.pull_request.title}}" \
+            --arg pr_by "🔀 New pull request by ${{github.actor}}:" \
+            --arg pr_url "${{github.event.pull_request.html_url}}" \
+            --arg avtar_url "https://avatars.githubusercontent.com/u/${{github.actor_id}}?s=60&v=4" \
+            --arg linear_title "${LINEAR_TITLE}" \
+            --arg linear_url "${LINEAR_URL}" \
+            '{
+              "attachments": [
+                {
+                  "contentType": "application/vnd.microsoft.card.adaptive",
+                  "contentUrl": null,
+                  "content": {
+                    "type": "AdaptiveCard",
+                    "version": "1.5",
+                    "body": [
+                      {
+                        "type": "Table",
+                        "gridStyle": "default",
+                        "firstRowAsHeader": false,
+                        "showGridLines": false,
+                        "columns": [
+                          {"width": 1 },
+                          {"width": 10 }
+                        ],
+                        "rows": [
+                          {
+                            "type": "TableRow",
+                            "cells": [
+                              {
+                                "type": "TableCell",
+                                "items": [
+                                  {
+                                    "type": "Image",
+                                    "url": $avtar_url,
+                                    "style": "person"
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "TableCell",
+                                "items": [
+                                  {
+                                    "type": "TextBlock",
+                                    "size": "Large",
+                                    "weight": "Bolder",
+                                    "text": $pr_by
+                                  },
+                                  {
+                                    "type": "TextBlock",
+                                    "size": "Large",
+                                    "weight": "Bolder",
+                                    "text": $prtitle
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "FactSet",
+                        "facts": [
+                          {"title": "📦 Repository", "value": $repo_name},
+                          {"title": "🌿 Branch", "value": $branch_name},
+                          {"title": "🧩 Linear title", "value": $linear_title}
+                        ]
+                      }
+                    ],
+                    "actions": [
+                      {
+                        "type": "Action.OpenUrl",
+                        "title": "Linear Task",
+                        "url": $linear_url
+                      },
+                      {
+                        "type": "Action.OpenUrl",
+                        "title": "GitHub PR",
+                        "url": $pr_url
+                      }
+                    ],
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json"
+                  }
+                }
+              ]
+            }' > payload.json
+          
+          curl -sS -X POST -H "Content-Type: application/json" \
+            -d @payload.json "$WEBHOOK_URL"

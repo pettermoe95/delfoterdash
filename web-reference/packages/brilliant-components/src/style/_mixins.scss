@@ -1,0 +1,39 @@
+// ===================================== //
+//             Flex Utility              //
+// ===================================== //
+
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+@mixin flex-column {
+    @include flex-row;
+    flex-direction: column;
+}
+
+@mixin flex-row-center {
+    @include flex-row;
+    justify-content: center;
+}
+
+// ===================================== //
+//             Style Utility             //
+// ===================================== //
+
+@mixin border-primary {
+    border-width: var(--border-width-small);
+    border-color: var(--border-color-primary);
+}
+
+@mixin border-secondary {
+    border-width: var(--border-width-small);
+    border-color: var(--border-color-secondary);
+}
+
+@mixin border-tertiary {
+    border-width: var(--border-width-small);
+    border-color: var(--border-color-tertiary);
+}

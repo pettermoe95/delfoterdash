@@ -1,0 +1,13 @@
+{
+    "eslint.workingDirectories": [
+        {
+            "mode": "auto"
+        }
+    ],
+    "editor.formatOnSave": true,
+    "js/ts.experimental.useTsgo": true,
+    "js/ts.tsdk.path": "./node_modules/@typescript/native",
+    "npm-intellisense.packageSubfoldersIntellisense": true,
+    "npm-intellisense.scanDevDependencies": true,
+    "figma.autocompleteBlocks": true
+}

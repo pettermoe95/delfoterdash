@@ -1,0 +1,49 @@
+@keyframes didUpdateFade {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    10% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    90% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+.didUpdate {
+    animation-name: didUpdateFade;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+    background-color: var(--action-positive-color-base);
+    color: var(--action-text-positive-color-base);
+    padding: calc(var(--spacing) * 0.25) calc(var(--spacing) * 0.8);
+    border-radius: 10000em;
+}
+
+.statusIndicator {
+    width: 0.5em;
+    height: 0.5em;
+    background-color: gray;
+    border-radius: 100%;
+    margin-left: 0.5em;
+
+    &.live {
+        background-color: #00ff00;
+        box-shadow: 0 0 0.2em 0.1em #00ff00;
+    }
+    &.old {
+        background-color: orange;
+        box-shadow: 0 0 0.2em 0.1em orange;
+    }
+    &.error {
+        background-color: #ff0000;
+        box-shadow: 0 0 0.2em 0.1em #ff0000;
+    }
+}

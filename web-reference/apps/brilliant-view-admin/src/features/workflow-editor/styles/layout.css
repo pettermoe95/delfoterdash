@@ -1,0 +1,176 @@
+.we-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-secondary, #e3e8ef);
+    z-index: 5;
+}
+.we-title {
+    flex: 1 1 260px;
+    min-width: 220px;
+    max-width: 440px;
+    margin-right: auto;
+}
+.we-title small span {
+    color: var(--text-brand-primary);
+    background: var(--bg-brand-primary);
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+.we-toolbar .we-title h1 {
+    height: 32px;
+    font-size: 22px;
+    line-height: 32px;
+}
+.we-editor .we-workflow-name {
+    width: 100%;
+    height: 32px;
+    justify-content: flex-start;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--text-primary);
+    font: inherit;
+}
+.we-workflow-name > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.we-workflow-name .we-button-icon {
+    color: var(--text-tertiary);
+}
+.we-editor .we-title input {
+    height: 32px;
+    padding: 0 4px;
+    font: inherit;
+}
+.we-toolbar nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+.we-separator {
+    height: 22px;
+    border-left: 1px solid var(--border-secondary, #e3e8ef);
+    margin: 0 4px;
+}
+.we-toolbar button,
+.we-toolbar summary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-color: var(--border-primary);
+}
+.we-button-icon {
+    flex-shrink: 0;
+}
+.we-toolbar .we-run {
+    border-color: var(--bg-brand-solid-primary);
+    color: var(--text-brand-primary);
+    background: var(--bg-brand-primary);
+}
+.we-toolbar .we-run:hover {
+    background: var(--bg-brand-secondary);
+}
+.we-editor .we-primary,
+.we-dialog .we-primary {
+    background: var(--bg-brand-solid-primary);
+    color: var(--text-white);
+    border-color: transparent;
+}
+.we-editor .we-primary:hover,
+.we-dialog .we-primary:hover {
+    background: var(--bg-brand-solid-primary-hover);
+}
+.we-more {
+    position: relative;
+}
+.we-more > div {
+    position: absolute;
+    right: 0;
+    top: 110%;
+    min-width: 240px;
+    width: max-content;
+    padding: 6px;
+    background: var(--bg-primary);
+    box-shadow: 0 8px 20px #0002;
+    border-radius: 8px;
+    display: grid;
+    gap: 4px;
+}
+.we-more summary {
+    list-style: none;
+}
+.we-more > div > button {
+    justify-content: flex-start;
+    text-align: left;
+}
+.we-workspace {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+.we-palette {
+    flex: 0 0 230px;
+    padding: 18px 14px;
+    overflow-y: auto;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-secondary, #e3e8ef);
+}
+.we-palette h2 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+.we-palette h2 span {
+    color: var(--text-tertiary);
+    font-size: 12px;
+}
+.we-palette section {
+    margin-top: 14px;
+}
+.we-palette section h3 {
+    margin-bottom: 6px;
+}
+.we-palette .we-palette-worker {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    margin: 0 0 5px;
+    padding: 7px 10px;
+    border-left: 3px solid var(--we-worker-color, var(--bg-brand-solid-primary));
+    cursor: grab;
+    user-select: none;
+    -webkit-user-drag: element;
+}
+.we-palette-worker strong {
+    pointer-events: none;
+}
+.we-palette .we-palette-worker:active {
+    cursor: grabbing;
+}
+.we-palette footer {
+    padding-top: 24px;
+    color: var(--text-tertiary);
+    font-size: 11px;
+    line-height: 1.8;
+}
+.we-center {
+    flex: 1;
+    min-width: 200px;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+.we-canvas {
+    flex: 1;
+    position: relative;
+    min-height: 120px;
+}

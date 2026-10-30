@@ -1,0 +1,115 @@
+trigger:
+    branches:
+        include:
+            - '*'
+
+parameters:
+    - name: environment
+      displayName: Environment for deploy
+      type: string
+      default: dev
+      values:
+          - dev
+          - qa
+          - prod
+
+pool:
+    vmImage: 'ubuntu-latest'
+
+# A variable group is used for each environment: dev, qa and prod.
+# 1) For commit to main    OR manual trigger and environment parameter set to 'qa'  -> use variable group for qa environment
+# 2) For commit to develop OR manual trigger and environment parameter set to 'dev' -> use variable group for dev environment
+# 3) for manual trigger and environment parameter set to 'prod' -> use variable group for prod environment
+
+variables:
+    - ${{ if or(and(eq(variables['Build.SourceBranchName'], 'main'), eq(variables['Build.Reason'], 'IndividualCI')), and(eq(variables['Build.Reason'], 'Manual'), eq(parameters.environment, 'qa'))) }}:
+          - group: qa_brilliant_view_group
+    - ${{ elseif or(and(eq(variables['Build.SourceBranchName'], 'develop'), eq(variables['Build.Reason'], 'IndividualCI')), and(eq(variables['Build.Reason'], 'Manual'), eq(parameters.environment, 'dev'))) }}:
+          - group: dev_brilliant_view_group
+    - ${{ elseif and(eq(variables['Build.Reason'], 'Manual'), eq(parameters.environment, 'prod')) }}:
+          - group: prod_brilliant_view_group
+    - name: variable_group_used
+      ${{ if or(and(eq(variables['Build.SourceBranchName'], 'main'), eq(variables['Build.Reason'], 'IndividualCI')), and(eq(variables['Build.Reason'], 'Manual'), eq(parameters.environment, 'qa'))) }}:
+          value: 'qa_brilliant_view_group'
+      ${{ elseif or(and(eq(variables['Build.SourceBranchName'], 'develop'), eq(variables['Build.Reason'], 'IndividualCI')), and(eq(variables['Build.Reason'], 'Manual'), eq(parameters.environment, 'dev'))) }}:
+          value: 'dev_brilliant_view_group'
+      ${{ elseif and(eq(variables['Build.Reason'], 'Manual'), eq(parameters.environment, 'prod')) }}:
+          value: 'prod_brilliant_view_group'
+      ${{ else }}:
+          value: 'none'
+    - name: location_in_fileshare
+      value: myfileshare/staticfiles
+
+stages:
+    - stage: Build
+      jobs:
+          - job: build_web_app
+            steps:
+                - task: NodeTool@0
+                  inputs:
+                      versionSpec: '18.x'
+                  displayName: 'Install Node.js'
+
+                - task: npmAuthenticate@0
+                  inputs:
+                      workingFile: '.npmrc'
+                  displayName: 'Authenticate with the npm DevOps feed'
+
+                - script: |
+                      npm install yarn
+                      yarn install
+                  displayName: 'Install dependencies'
+
+                - script: |
+                      yarn build
+                  displayName: 'Build web app'
+
+                - publish: $(System.DefaultWorkingDirectory)/dist
+                  artifact: dist
+
+    - stage: Deploy
+      condition: and(succeeded(), ne(variables.variable_group_used, 'none'))
+      jobs:
+          - job: deploy_web_app_to_azure_files
+            steps:
+                - script: |
+                      if [ "$(variable_group_used)" == "none" ]; then
+                        echo "No variable group defined. Exiting pipeline."
+                        exit 1
+                      else
+                        echo "Using variable group:"
+                        echo $(variable_group_used)
+                      fi
+                  displayName: 'Check variable group used'
+                - task: Bash@3
+                  displayName: Install azcopy
+                  inputs:
+                      targetType: 'inline'
+                      script: |
+                          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+                          mkdir $(Agent.ToolsDirectory)/azcopy
+                          wget -O $(Agent.ToolsDirectory)/azcopy/azcopy_v10.tar.gz https://aka.ms/downloadazcopy-v10-linux
+                          tar -xf $(Agent.ToolsDirectory)/azcopy/azcopy_v10.tar.gz -C $(Agent.ToolsDirectory)/azcopy --strip-components=1
+
+                - script: |
+                      azcopy login --service-principal --application-id $(SERVICE_PRINCIPAL_ID) --tenant-id $(TENANT_ID)
+                  displayName: 'azcopy login'
+                  env:
+                      AZCOPY_SPA_CLIENT_SECRET: $(SERVICE_PRINCIPAL_SECRET)
+
+                - download: current
+                  artifact: dist
+
+                - script: |
+                      RESPONSE=$(azcopy list "https://$(FILE_SHARE_NAME).file.core.windows.net/$(location_in_fileshare)/dist$(FILE_SHARE_SAS_TOKEN)")
+                      if [[ "$RESPONSE" == *"The specified resource does not exist"* ]]; 
+                      then 
+                        echo "dist folder does not exist in file share"
+                      else
+                        azcopy remove "https://$(FILE_SHARE_NAME).file.core.windows.net/$(location_in_fileshare)/dist$(FILE_SHARE_SAS_TOKEN)" --recursive
+                      fi
+                  displayName: 'Remove dist folder if it exists'
+
+                - script: |
+                      azcopy copy /home/vsts/work/1/dist "https://$(FILE_SHARE_NAME).file.core.windows.net/$(location_in_fileshare)$(FILE_SHARE_SAS_TOKEN)" --recursive
+                  displayName: 'Upload dist folder'

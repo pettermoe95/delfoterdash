@@ -1,0 +1,56 @@
+/* Variable use checked by stylelint is not relevant for this wrapper */
+/* stylelint-disable scale-unlimited/declaration-strict-value */
+
+.enable_button {
+    color: var(--text-color-secondary);
+    border-radius: 1000em;
+    font-size: 0.75em;
+    cursor: pointer;
+    &:hover {
+        filter: brightness(110%);
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: stretch;
+    gap: 1em;
+}
+
+.child_wrapper {
+    border: 1px dashed red;
+}
+
+.tool_box {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.2em;
+    border: 1px dotted red;
+    padding: 1em;
+    max-width: 100%;
+    background-color: white;
+    color: black;
+
+    b {
+        margin-left: 1em;
+    }
+}
+
+.tool_button {
+    border: 1px solid black;
+    padding: 0 0.2em;
+    color: black;
+    border-radius: 0.25em;
+    cursor: pointer;
+
+    &.selected {
+        border: 1px solid black;
+        color: red;
+    }
+    &:hover {
+        background-color: #eee;
+    }
+}

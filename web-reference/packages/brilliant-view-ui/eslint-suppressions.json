@@ -1,0 +1,60 @@
+{
+    "src/Dashboard/DashboardGridCard.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/DataTable/tables/VirtualTable.tsx": {
+        "@typescript-eslint/no-non-null-assertion": {
+            "count": 1
+        },
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/Graph/GraphElement.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 48
+        }
+    },
+    "src/Graph/graphElementUtils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 23
+        }
+    },
+    "src/Graph/transformation.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 17
+        }
+    },
+    "src/MobileNav/MobileNav.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/ProgressIndicator/ProgressIndicator.tsx": {
+        "@typescript-eslint/no-non-null-assertion": {
+            "count": 1
+        }
+    },
+    "src/SerieTypeAndColorPicker/ChartTypeButtons.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/Sidebar/NavLink/NavLink.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/Toast/ToastContext.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/utils/extractTimePeriod.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    }
+}

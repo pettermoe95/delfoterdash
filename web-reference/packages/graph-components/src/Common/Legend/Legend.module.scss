@@ -1,0 +1,12 @@
+.legend_container {
+    cursor: pointer;
+    border-radius: var(--border-radius-small);
+    user-select: none;
+    -webkit-user-select: none;
+    font: var(--text-font-xs-regular);
+    padding: var(--spacing-xs);
+    color: var(--text-secondary);
+    &:hover {
+        background-color: var(--background-color-secondary);
+    }
+}

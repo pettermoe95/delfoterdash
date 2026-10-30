@@ -1,0 +1,31 @@
+name: 🚀 Deploy Admin Panel TEST
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "deploy_admin_panel_dev.yml"
+      - "apps/brilliant-view-admin/**"
+      - "packages/**"
+
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-deploy_admin_panel
+  cancel-in-progress: true
+
+jobs:
+  deploy-admin-panel:
+    name: Deploy Admin Panel
+    uses: ./.github/workflows/base_deploy_frontend.yml
+    secrets: inherit
+    with:
+      app-name: brilliant-view-admin
+      image-name: admin-panel
+      environment: test
+      debug: true

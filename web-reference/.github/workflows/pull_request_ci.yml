@@ -1,0 +1,39 @@
+name: Pull Request CI
+
+on:
+  pull_request:
+    branches:
+      - "*"
+
+  merge_group:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  build_and_lint:
+    name: 🚧 Build, Lint and Test Project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+            fetch-depth: 0
+
+      - name: 🔧 Setup
+        uses: ./tooling/github/setup
+
+      - name: 👷‍♂️ Build packages and affected design docs
+        run: |
+          echo "Checking if design docs or their shared dependencies have changed..."
+          if git diff --quiet origin/main -- apps/design-docs/ packages/ tooling/ package.json pnpm-workspace.yaml pnpm-lock.yaml; then
+            echo "🚫 Design docs and shared dependencies unchanged — excluding design-docs"
+            pnpm exec turbo run build --filter=!design-docs
+          else
+            echo "📦 Design docs or shared dependencies changed — running full build"
+            pnpm exec turbo run build
+          fi
+      
+
+      - name: 🔍 Lint, typecheck, format and 🧪 run tests
+        run: pnpm exec turbo run pre-build lint typecheck test format

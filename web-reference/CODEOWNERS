@@ -1,0 +1,16 @@
+# MONO REPOSITORY OWNER
+# everything that is not specified is owned by a specific team
+*							@brilliant-as/brilliant-view-frontend
+# Codeowners are managed by
+CODEOWNERS                  @Simrayz
+
+# FRONTEND TEAM
+/apps/						@brilliant-as/brilliant-view-frontend
+
+/packages/                  @brilliant-as/brilliant-view-frontend
+/packages/bds-core          @brilliant-as/brilliant-design-system
+/packages/brilliant-view-ui @brilliant-as/brilliant-design-system
+/packages/design-tokens     @brilliant-as/brilliant-design-system
+
+/.github/                   @Simrayz
+/tooling/                   @Simrayz

@@ -1,0 +1,231 @@
+name: Tag Notification to Webhook
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate tag format
+        run: |
+          TAG_NAME="${GITHUB_REF_NAME}"
+          if [[ ! $TAG_NAME =~ ^v[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{4}$ ]]; then
+            echo "Tag format invalid: $TAG_NAME (skipping)"
+            exit 0
+          fi
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+
+      - name: Collect repo + commit info
+        run: |
+          echo "REPO_NAME=${GITHUB_REPOSITORY}" >> $GITHUB_ENV
+
+          COMMIT_SUBJECT="$(git log -1 --pretty=%s)"
+          COMMIT_MSG="$(git log -1 --pretty=%B)"
+
+          {
+            echo "COMMIT_SUBJECT<<EOF"
+            echo "$COMMIT_SUBJECT"
+            echo "EOF"
+            echo "COMMIT_MSG<<EOF"
+            echo "$COMMIT_MSG"
+            echo "EOF"
+          } >> "$GITHUB_ENV"
+
+      - name: Extract PR number from commit subject "(#123)"
+        id: find_pr
+        run: |
+          if [[ "$COMMIT_SUBJECT" =~ \(#([0-9]+)\)$ ]]; then
+            PR_NUMBER="${BASH_REMATCH[1]}"
+            echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+            echo "FOUND_PR=true" >> $GITHUB_ENV
+          else
+            echo "FOUND_PR=false" >> $GITHUB_ENV
+          fi
+
+      - name: Fetch merged branch name (if PR found)
+        if: env.FOUND_PR == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OWNER_REPO="${GITHUB_REPOSITORY}"
+          API_URL="https://api.github.com/repos/${OWNER_REPO}/pulls/${PR_NUMBER}"
+
+          PR_JSON="$(curl -sS -H "Authorization: Bearer $GH_TOKEN" \
+                            -H "Accept: application/vnd.github+json" \
+                            "$API_URL")"
+
+          echo "$PR_JSON"
+
+          BRANCH_NAME="$(echo "$PR_JSON" | jq -r '.head.ref // empty')"
+
+          if [ -n "$BRANCH_NAME" ] && [ "$BRANCH_NAME" != "null" ]; then
+            echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+            echo "BRANCH_FOUND=true" >> $GITHUB_ENV
+          else
+            echo "BRANCH_FOUND=false" >> $GITHUB_ENV
+          fi
+
+      - name: Parse Linear ID from branch name
+        if: env.BRANCH_FOUND == 'true'
+        run: |
+          LOWER_BRANCH="$(echo "$BRANCH_NAME" | tr '[:upper:]' '[:lower:]')"
+          BRI_SLUG="$(echo "$LOWER_BRANCH" | grep -Eo 'bri-[0-9]{3,4}-' || true)"
+
+          if [ -n "$BRI_SLUG" ]; then
+            LINEAR_ID="$(echo "$BRI_SLUG" | sed -E 's/^bri-([0-9]{3,4})-$/BRI-\1/I')"
+            echo "LINEAR_ID=$LINEAR_ID" >> $GITHUB_ENV
+            echo "HAS_LINEAR_ID=true" >> $GITHUB_ENV
+          else
+            echo "HAS_LINEAR_ID=false" >> $GITHUB_ENV
+          fi
+
+      - name: Lookup Linear issue
+        if: env.HAS_LINEAR_ID == 'true'
+        env:
+          LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+        run: |
+          QUERY="{\"query\":\"query Issue { issue(id: \\\"$LINEAR_ID\\\") { id title url description } }\"}"
+          
+          echo "$QUERY"
+
+          RESPONSE=$(curl -sS -X POST https://api.linear.app/graphql \
+            -H "Content-Type: application/json" \
+            -H "Authorization: $LINEAR_API_KEY" \
+            -d "$QUERY")
+
+          echo "$RESPONSE"
+
+          TITLE=$(echo "$RESPONSE" | jq -r '.data.issue.title // empty')
+          URL=$(echo "$RESPONSE" | jq -r '.data.issue.url // empty')
+
+          if [ -n "$TITLE" ] && [ -n "$URL" ]; then
+            echo "LINEAR_TITLE=$TITLE" >> $GITHUB_ENV
+            echo "LINEAR_URL=$URL" >> $GITHUB_ENV
+            echo "LINEAR_FOUND=true" >> $GITHUB_ENV
+          else
+            echo "LINEAR_FOUND=false" >> $GITHUB_ENV
+          fi
+
+      - name: Post MessageCard to Teams webhook
+        env:
+          WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+        run: |
+          TIMESTAMP="$(date -u +'%Y-%m-%d %H:%M UTC')"
+          RELEASE_URL="https://github.com/Brilliant-AS/brilliant_view_frontend/actions/workflows/release_frontend.yml"
+          BRANCH_DISPLAY="${BRANCH_NAME:-N/A}"
+
+          if [ "${LINEAR_FOUND}" = "true" ]; then
+            jq -n \
+            --arg repo "$REPO_NAME" \
+            --arg tag "$TAG_NAME" \
+            --arg branch "$BRANCH_DISPLAY" \
+            --arg ts "$TIMESTAMP" \
+            --arg lid "$LINEAR_ID" \
+            --arg ltitle "$LINEAR_TITLE" \
+            --arg lurl "$LINEAR_URL" \
+            --arg rurl "$RELEASE_URL" \
+            '{
+              "attachments": [
+                {
+                  "contentType": "application/vnd.microsoft.card.adaptive",
+                  "contentUrl": null,
+                  "content": {
+                    "type": "AdaptiveCard",
+                    "version": "1.4",
+                    "body": [
+                      {
+                        "type": "TextBlock",
+                        "size": "Large",
+                        "weight": "Bolder",
+                        "text": "🚀 New Tag Deployed to Test Environment"
+                      },
+                      {
+                        "type": "FactSet",
+                        "facts": [
+                          {"title": "📦 Repository", "value": $repo},
+                          {"title": "🏷️ Tag", "value": $tag},
+                          {"title": "🌿 Branch", "value": $branch},
+                          {"title": "🧩 Linear", "value": ($lid + " — [" + $ltitle + "](" + $lurl + ")")},
+                          {"title": "🕒 Time", "value": $ts}
+                        ]
+                      }
+                    ],
+                    "actions": [
+                      {
+                        "type": "Action.OpenUrl",
+                        "title": "Deploy to prod",
+                        "url": $rurl
+                      }
+                    ],
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json"
+                  }
+                }
+              ]
+            }' > payload.json
+          else
+            jq -n \
+            --arg repo "$REPO_NAME" \
+            --arg tag "$TAG_NAME" \
+            --arg branch "$BRANCH_DISPLAY" \
+            --arg ts "$TIMESTAMP" \
+            --arg cm "$COMMIT_MSG" \
+            --arg rurl "$RELEASE_URL" \
+            '{
+              "attachments": [
+                {
+                  "contentType": "application/vnd.microsoft.card.adaptive",
+                  "contentUrl": null,
+                  "content": {
+                    "type": "AdaptiveCard",
+                    "version": "1.4",
+                    "body": [
+                      {
+                        "type": "TextBlock",
+                        "size": "Large",
+                        "weight": "Bolder",
+                        "text": "🚀 New Tag Deployed to Test Environment"
+                      },
+                      {
+                        "type": "FactSet",
+                        "facts": [
+                          {"title": "📦 Repository", "value": $repo},
+                          {"title": "🏷️ Tag", "value": $tag},
+                          {"title": "🌿 Branch", "value": $branch},
+                          {"title": "🕒 Time", "value": $ts}
+                        ]
+                      },
+                      {
+                        "type": "TextBlock",
+                        "text": "**Commit message:**\n\n```\n" + $cm + "\n```",
+                        "wrap": true
+                      }
+                    ],
+                    "actions": [
+                      {
+                        "type": "Action.OpenUrl",
+                        "title": "Deploy to prod",
+                        "url": $rurl
+                      }
+                    ],
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json"
+                  }
+                }
+              ]
+            }' > payload.json
+            fi
+
+          curl -sS -X POST -H "Content-Type: application/json" \
+            -d @payload.json "$WEBHOOK_URL"
+
+permissions:
+  contents: read
+  pull-requests: read

@@ -1,0 +1,95 @@
+{
+    "src/Common/Legend/Legend.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/Common/Tooltip/GraphTooltip.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 9
+        }
+    },
+    "src/Components/AxisGraph/DisplayTypes/LineDisplay.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/Components/AxisGraph/useAxisSeriesAndLegends.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 6
+        }
+    },
+    "src/Components/CalendarGraph/CalendarGraph.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/Components/FunnelGraph/FunnelGraph.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/Components/FunnelGraph/utils.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/Components/GaugeGraph/GaugeGraph.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/Components/KpiGraph/GraphDesignBlocks/KpiGraphDesignBlocks.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/Components/KpiGraph/KpiGraph.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/Components/PieGraph/PieGraph.tsx": {
+        "@typescript-eslint/no-non-null-assertion": {
+            "count": 1
+        },
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 10
+        }
+    },
+    "src/Components/StatusGraph/StatusGraph.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/Theme/Config/config.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 13
+        }
+    },
+    "src/Theme/GraphColorTheme.tsx": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 1
+        }
+    },
+    "src/Theme/useLimitTheme.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/Utility/extractTimePeriod.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    },
+    "src/Utility/numberFormatter.ts": {
+        "@typescript-eslint/no-non-null-assertion": {
+            "count": 1
+        }
+    },
+    "src/Utility/unitFormatter.ts": {
+        "@typescript-eslint/no-unnecessary-condition": {
+            "count": 2
+        }
+    }
+}

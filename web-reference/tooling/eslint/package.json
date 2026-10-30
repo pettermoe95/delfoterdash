@@ -1,0 +1,29 @@
+{
+    "name": "@repo/eslint-config",
+    "private": true,
+    "version": "0.1.1",
+    "type": "module",
+    "exports": {
+        "./base": "./base.js",
+        "./nextjs": "./nextjs.js",
+        "./react": "./react.js"
+    },
+    "scripts": {
+        "clean": "rm -rf .turbo node_modules .cache",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "eslint-plugin-import": "catalog:",
+        "eslint-plugin-jsx-a11y": "catalog:",
+        "eslint-plugin-react": "catalog:",
+        "eslint-plugin-react-hooks": "catalog:",
+        "eslint-plugin-turbo": "2.0.3",
+        "typescript-eslint": "catalog:"
+    },
+    "devDependencies": {
+        "@repo/typescript-config": "workspace:*",
+        "eslint": "^9.32.0",
+        "@typescript/native": "catalog:",
+        "typescript": "catalog:"
+    }
+}

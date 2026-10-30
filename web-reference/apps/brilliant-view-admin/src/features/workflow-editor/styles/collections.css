@@ -1,0 +1,239 @@
+.we-collection {
+    display: grid;
+    gap: 5px;
+}
+
+.we-collection > button {
+    justify-self: start;
+}
+
+.we-list-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 4px 6px;
+    padding: 6px;
+    border: 1px solid var(--border-secondary);
+    border-radius: 6px;
+}
+
+.we-list-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.we-list-actions {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.we-list-item > .we-field {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.we-list-item:has(> .we-drag-handle) {
+    padding-left: 18px;
+}
+
+.we-editor button.we-drag-handle {
+    position: absolute;
+    inset: 3px auto 3px 2px;
+    width: 12px;
+    padding: 0;
+    border: 0;
+    border-radius: 2px;
+    background: transparent;
+    color: var(--text-tertiary);
+    cursor: grab;
+    user-select: none;
+    -webkit-user-drag: element;
+}
+
+.we-editor button.we-drag-handle::before {
+    content: '';
+    position: absolute;
+    inset: 4px 3px;
+    background: radial-gradient(circle, currentColor 0.7px, transparent 1px) 0 0 /
+        4px 6px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.we-editor button.we-drag-handle:hover {
+    background: var(--bg-primary-hover);
+}
+
+.we-editor button.we-drag-handle:hover::before,
+.we-editor button.we-drag-handle:focus-visible::before {
+    opacity: 1;
+}
+
+.we-editor button.we-drag-handle:active {
+    cursor: grabbing;
+}
+
+[data-sort-item] {
+    position: relative;
+}
+
+[data-sort-target]::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--bg-brand-solid-primary);
+    pointer-events: none;
+}
+
+[data-sort-target='before']::after {
+    top: -3px;
+}
+
+[data-sort-target='after']::after {
+    bottom: -3px;
+}
+
+.we-panel-content .we-list-item .we-field {
+    margin: 0;
+    gap: 4px;
+}
+
+.we-list-item .we-object {
+    border: 0;
+    padding: 0;
+    display: grid;
+    gap: 4px;
+}
+
+.we-list-item .we-object > .we-field:not(.we-field-checkbox) {
+    display: grid;
+    grid-template-columns: 90px minmax(0, 1fr);
+    align-items: center;
+    gap: 4px 6px;
+}
+
+.we-list-item .we-object > .we-field:has(> .we-collection),
+.we-list-item .we-object > .we-field:has(> .we-object) {
+    display: flex;
+    align-items: stretch;
+}
+
+.we-list-item .we-field > .we-row {
+    font-size: 11px;
+    gap: 4px;
+}
+
+.we-list-item .we-field > small,
+.we-list-item .we-field > .we-row:has(> span) {
+    grid-column: 1 / -1;
+}
+
+.we-list-item-compact {
+    align-items: center;
+    padding: 3px;
+}
+
+.we-list-item-compact .we-field > .we-row > label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.we-list-item-compact .we-field > .we-row:has(label:only-child) {
+    position: absolute;
+}
+
+.we-list-item-compact .we-union {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.we-list-item-compact .we-union > select {
+    flex: 0 0 82px;
+}
+
+.we-list-item-compact .we-union > .we-field {
+    flex: 1;
+}
+
+.we-record-key {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.we-record-item > .we-field {
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+.we-record-item.we-list-item-compact {
+    grid-template-columns: minmax(56px, 80px) minmax(0, 1fr) auto;
+}
+
+.we-record-item.we-list-item-compact > .we-field {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.we-record-item.we-list-item-compact > .we-list-actions {
+    grid-column: 3;
+}
+
+.we-editor .we-list-item input,
+.we-editor .we-list-item select {
+    padding: 4px 7px;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+.we-editor .we-collection > button,
+.we-editor .we-worker-inputs button {
+    padding: 3px 7px;
+    font-size: 11px;
+}
+
+.we-input-connection {
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.we-input-connection:has(> .we-drag-handle) {
+    padding-left: 18px;
+}
+
+.we-input-connection .we-input-name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.we-worker-inputs h3 {
+    margin-bottom: 4px;
+}
+
+.we-worker-inputs p {
+    margin: 4px 0 8px;
+    color: var(--text-tertiary);
+    font-size: 11px;
+}
+
+.we-editor .we-list-actions button {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 26px;
+    padding: 2px;
+}
